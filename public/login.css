@@ -1,0 +1,150 @@
+body {
+    background-color: white !important;
+    font-family: "Raleway", sans-serif !important;
+    background-image: url(./Images/pngwing.com.png);
+}
+
+#container {
+    height: 100vh;
+    max-width: 448px;
+    background-color: white !important;
+    margin: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#image {
+    height: 200px;
+    width: 100%;
+    background-image: url(Images/bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#form {
+    height: 517px;
+    width: 100%;
+    background-color: aliceblue;
+    border-radius: 25px 25px 0 0;
+    margin: -50px 0 0 0;
+    padding: 15px 30px;
+}
+
+#signUp h3{
+    height: fit-content;
+    width: 100%;
+    text-align: center;
+}
+
+
+#user {
+    margin: 10px 0 -1px 0;
+    font-weight: 600;
+}
+
+.inpt {
+    background-color: transparent;
+    border: 2px solid #ffc107;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+}
+
+#pass {
+    height: 40px;
+    width: 90%;
+    border: 2px solid #ffc107;
+    border-radius: 5px;
+}
+
+.inpts {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 90%;
+    height: 35px;
+}
+
+#btns {
+    margin-top: 15px !important;
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+#welcomepage {
+    height: 100vh;
+    max-width: 448px;
+    background-color: #ffc107 !important;
+    /* background-color: #0a0831 !important; */
+    margin: auto;
+    font-weight: 600;
+    color: #0a0831;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#welcome {
+    display: flex;
+    justify-content: center;
+    padding: 50% 0 0 0;
+}
+
+#safebank {
+    height: 50px;
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+
+#build {
+    width: 80%;
+    height: 50px !important;
+    text-align: center;
+    margin: auto;
+    padding: 40px  0 0 0;
+}
+
+#autotype {
+    font-size: 40px;
+    -webkit-text-fill-color: #0a0831;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #0a0831;
+    font-weight: 600;
+    /* -webkit-text-stroke-color: #ffc107; */
+}
+
+#dot {
+    /* height: 50px; */
+    justify-content: center;
+    text-align: center;
+    margin: 11em 0 0 0;
+    align-items: center;
+    gap: 15px;
+}
+
+#dotss {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #0a0831;
+}
+
+#dots {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #0a0831;
+}
+
+
+::-webkit-scrollbar{
+    width: 5px;
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #ffc107;
+    border-radius: 50px;
+}

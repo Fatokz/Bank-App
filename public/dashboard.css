@@ -1,0 +1,47 @@
+/* body{
+    background-color: #0a0831 !important;
+} */
+
+#container{
+    height: 100vh;
+    max-width: 448px;
+    background-color: #0a0831 !important;
+    margin: auto;
+    padding: 10px ;
+}
+
+nav{
+    height: 3em;
+    width: 100%;
+    background-color: #ffc107;
+    position: sticky;
+    z-index: 4;
+}
+
+#content{
+    height: 15em;
+    width: 100%;
+    background-color: #ffc107;
+    margin: 15px 0 0 0;
+}
+
+#account{
+    height: 7em;
+    width: 100%;
+    background-color: #ffc107;
+    margin: 15px 0 0 0;
+}
+
+#ads{
+    height: 5em;
+    width: 100%;
+    background-color: #ffc107;
+    margin: 15px 0 0 0;
+}
+
+footer{
+    height: 3em;
+    width: 100%;
+    background-color: #ffc107;
+    margin: 15px 0 0 0;
+}
