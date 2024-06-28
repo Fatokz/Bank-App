@@ -18,7 +18,7 @@ let forms = document.getElementById("forms")
 let LoginAcc = document.getElementById("LoginAcc")
 
 
-// welcomepage.style.display = "none"
+welcomepage.style.display = "none"
 
 
 // registerAcc.setAttribute('disabled', 'true');
@@ -86,7 +86,7 @@ function gainAccess(ev) {
 }
 
 let autotype = document.getElementById("autotype");
-let text = "SafeCoin";
+let text = "SafeCoin Bank";
 let index = 0;
 let forward = true
 
@@ -102,7 +102,7 @@ setInterval(() => {
     } else {
         forward = true;
     }
-}, 300);
+}, 400);
 
 function dashboard() {
     welcomepage.style.display = "block"
