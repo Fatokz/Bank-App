@@ -1,13 +1,13 @@
 body {
-    background-color: white !important;
     font-family: "Raleway", sans-serif !important;
     background-image: url(./Images/pngwing.com.png);
     width: 100%;
+    background-size: cover;
     /* opacity: 0.5; */
 }
 
 #container {
-    height: 70vh;
+    height: 100vh;
     max-width: 448px;
     background-color: white !important;
     margin: auto;
@@ -90,7 +90,6 @@ body {
     border-radius: 5px;
     /* background-color: rgba(250, 247, 247, 0.507); */
 }
-
 
 
 #pass {

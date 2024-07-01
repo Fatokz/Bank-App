@@ -1,0 +1,107 @@
+body {
+    font-family: "Raleway", sans-serif !important;
+    background-image: url(./Images/pngwing.com.png);
+    width: 100%;
+    background-size: cover;
+}
+
+#container {
+    height: 100vh;
+    max-width: 448px;
+    background-color: white;
+    margin: auto;
+    padding: 30px 12px 12px 12px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#adsimg {
+    height: 20em;
+    width: 100%;
+    /* background-color: red; */
+}
+
+#adsimg img {
+    height: 17em;
+}
+
+#writeup {
+    height: 12em;
+    width: 100%;
+    /* background-color: red; */
+    color: #030b1d;
+}
+
+#writeup h3 {
+    width: 70%;
+    font-weight: 600;
+}
+
+#writeup p {
+    font-weight: 500;
+}
+
+#next{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+#button {
+    background-color: #ffc107;
+    color: #030b1d;
+    width: 8em;
+    height: 2.7em;
+    border: #030b1d 1px solid;
+    border-radius: 11px;
+    text-align: right;
+    transition: all 0.6s ease;
+}
+
+#button:hover {
+    background-color: #ffc107;
+    cursor: pointer;
+}
+
+#button svg {
+    width: 1.6em;
+    margin: -0.2em 0.8em 1em;
+    position: absolute;
+    display: flex;
+    transition: all 0.6s ease;
+}
+
+#button:hover svg {
+    transform: translateX(5px);
+}
+
+#text {
+    margin: 0 1.5em
+}
+
+#texts {
+    margin: 0 0.5em;
+}
+
+
+#secondads{
+    display: none;
+}
+
+#thirdads{
+    display: none;
+}
+
+#fourthads{
+    display: none;
+}
+
+#fifthads{
+    display: none;
+}
+
+@media (max-width : 430px) {
+    #adsimg img {
+        height: 14em;
+    }
+}

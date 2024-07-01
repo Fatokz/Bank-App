@@ -92,6 +92,17 @@
           <div id="getstarted">
             <button class="btn btn-warning fs-5 text-danger" onclick="getsignup()">Get Started</button>
           </div>
+          <div id="regulated">
+            <p>Fully backed to fully bank you</p>
+            <div class="d-flex justify-content-center">
+              <div id="cbns">
+                <img src="./Images/cbn.svg" alt="">
+              </div>
+              <div id="cbns">
+                <img src="./Images/ndic.svg" alt="">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="text-center  heit">
@@ -100,7 +111,7 @@
     </section>
 
     <section id="two">
-      <div class="d-flex  topp">
+      <div class="d-flex topp">
         <div id="top_airtime" data-aos="zoom-in-left">
 
         </div>
@@ -199,7 +210,7 @@
     </section>
 
     <section id="six">
-      <div id="center">
+      <div id="center" data-aos="fade-up">
         <div id="cen_ter">
           <div id="weight">
             <h2>Get exclusive updates</h2>
@@ -214,7 +225,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> 
 
     <div id="modal">
       <!-- Button trigger modal -->
@@ -246,9 +257,77 @@
       </div>
     </div>
 
-    <footer>
-      <div>
-        <p>2024 SafeCoin Bank. All rights reserved</p>
+    <footer id="footer">
+      <div id="aboutus">
+        <div id="companys" data-aos="fade-up">
+          <div id="alt">
+            <img id="myapp" class="mx-3" src="./Images/safecoinbg.png" alt="">
+            <span>Safecoin Bank</span>
+            <p class="mt-4 mx-3">Safecoin Bank is authorised and regulated by the Central Bank of Nigeria to offer
+              banking
+              services. Deposits are insured by the Nigerian Deposit Insurance Corporation (NDIC).</p>
+            <div id="download" class="d-flex gap-3 mt-4">
+              <div onclick="download(event)" id="apple" class="d-flex align-items-center">
+                <button><img src="./Images/apple.svg" alt=""></button>
+                <p>Get it on <b>App Store</b></p>
+              </div>
+              <div onclick="download(event)" id="play" class="d-flex align-items-center">
+                <button><img src="./Images/playstore.svg" alt=""></button>
+                <p>Get it on <b>Google Play</b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div id="company" data-aos="fade-up">
+            <p class="fw-bold">For Business</p>
+            <p>Business Account</p>
+            <p>Point of Sale Terminal</p>
+            <p>Loan</p>
+            <p>Expense Card</p>
+          </div>
+          <div id="company" data-aos="fade-up">
+            <p class="fw-bold">For Personal</p>
+            <p>Instant Debit Card</p>
+            <p>Personal Account</p>
+            <p>Payment</p>
+            <p>Personal Banking</p>
+          </div>
+          <div id="company" data-aos="fade-up">
+            <p class="fw-bold">Company</p>
+            <p>About Us</p>
+            <p>Culture</p>
+            <p>Join Our Team</p>
+            <p>Press & Media</p>
+            <p>Contact Us</p>
+          </div>
+          <div id="company" data-aos="fade-up">
+            <p class="fw-bold">Resources</p>
+            <p>Safecoin Blog</p>
+            <p>Help Centre</p>
+            <p>Learning Centre</p>
+            <p>Whistleblower Policy</p>
+            <p>IMS Policy</p>
+          </div>
+      </div>
+      <div id="end">
+        <div id="last">
+          <p class="pt-4">Copyright © 2024, Safecoin</p>
+        </div>
+        <div id="last">
+          <p>Connect with us</p>
+          <div id="butten">
+            <button><img src="./Images/linkedin.svg" alt=""></button>
+            <button><a href="https://x.com/Ambassador__01"><img src="./Images/twitter.svg" alt=""></a></button>
+            <button><img src="./Images/instagram.svg" alt=""></button>
+            <button><img src="./Images/youtube.svg" alt=""></button>
+            <button><img src="./Images/facebook.svg" alt=""></button>
+            <button><a href="https://wa.me/qr/B24SUZE754P4E1 "><img id="chatme" src="./Images/1217136_whatsapp_icon.png" alt=""></a></button>
+          </div>
+        </div>
+        <div id="last" class="d-flex justify-content-between">
+          <p>Privacy Policy</p>
+          <p>Cookie Policy</p>
+        </div>
       </div>
     </footer>
   </main>
@@ -258,7 +337,7 @@
 <script src="script.js"></script>
 <script src="aos.js"></script>
 <script>
-    AOS.init()
+  AOS.init()
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

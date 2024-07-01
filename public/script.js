@@ -24,7 +24,9 @@ function getsignup() {
   window.location.href = 'signup.html'
 }
 
-
+function download(event) {
+    alert("Coming Soon")
+}
 
 
 

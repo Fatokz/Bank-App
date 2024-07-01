@@ -85,6 +85,8 @@ function gainAccess(ev) {
     signedPassword.value = "";
 }
 
+
+
 let autotype = document.getElementById("autotype");
 let text = "SafeCoin Bank";
 let index = 0;

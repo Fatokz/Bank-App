@@ -21,6 +21,7 @@ let eye = document.getElementById("eye")
 let show = document.getElementById("show")
 let username = document.getElementById("username")
 let register = document.getElementById("register")
+let form = document.getElementById("form")
 let acc_details;
 
 
@@ -61,17 +62,17 @@ function spinner() {
 register.disabled = !register.disabled;
 
 function enable(event) {
-    console.log(event.target.value)
-    if (conpassword == "") {
+    // console.log(event.target.value)
+    if (conpassword.value == "") {
         return
     }
     else if (password.value == conpassword.value) {
         register.disabled = !register.disabled
-        console.log("password equal");
+        // console.log("password equal");
         return
     }
-    else{
-        console.log("password not correct");
+    else {
+        // console.log("password not correct");
         register.disabled = register
     }
 }
@@ -79,7 +80,6 @@ function enable(event) {
 
 function createAcc(event) {
     event.preventDefault()
-    let username = document.getElementById("username")
 
     if (username.value == "" || firstname.value == "" || lastname.value == "" || email.value == "" || password.value == "" || conpassword.value == "") {
         alert("All fields are required")
@@ -95,46 +95,42 @@ function createAcc(event) {
         spinner()
 
         firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
-        .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user;
-            
-            user.updateProfile({
-                displayName: username.value,
-            }).then(() => {
-                // Update successful
-                // ...
-                message.innerHTML = `<h2 class = "text-success"> Registration Successfull</h2>`
+            .then((userCredential) => {
+                // Signed in 
+                var user = userCredential.user;
+
+                user.updateProfile({
+                    displayName: username.value,
+                }).then(() => {
+                    // Update successful
+                    // ...
+                    message.innerHTML = `<h2 class = "text-success">Registration Successfull</h2>`
+                    register.innerHTML = "Create Account"
+                    window.location.href = "ads.html"
+                    console.log(user);
+                    console.log(username.value);
+                }).catch((error) => {
+                    // An error occurred
+                    // ...
+                    console.log("Something went wrong", error);
+                });
+                // alert("Registration Successful")
+
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
+                message.innerHTML = `<h2 class = "text-danger">${errorMessage}</h2>`
+                if (message.innerHTML = `<h2 class = "text-danger">${errorMessage}</h2>`) {
+                    form.style.height = "fit-content"
+                }
                 register.innerHTML = "Create Account"
-                // window.location.href = "login.html"
-                console.log(user);
-                console.log(username.value);
-            }).catch((error) => {
-                // An error occurred
-                // ...
-                console.log("Something went wrong", error);
+                // ..
             });
-            // alert("Registration Successful")
-
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage);
-            message.innerHTML = `<h2 class = "text-danger">${errorMessage}</h2>`
-            register.innerHTML = "Create Account"
-            // ..
-        });
-}
+    }
 }
 
-username.value = "";
-firstname.value = "";
-lastname.value = "";
-email.value = "";
-password.value = "";
-conpassword.value = "";
-message.innerHTML = "";
 
 function login() {
     window.location.href = "login.html"
