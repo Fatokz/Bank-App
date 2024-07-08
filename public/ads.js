@@ -38,3 +38,18 @@ function proceed() {
     fifthads.style.display = "none"
     window.location.href = "login.html"
 }
+
+function settime() {
+    setTimeout(() => {
+        next1()
+    }, 3000);
+    setTimeout(() => {
+        next2()
+    }, 6000);
+    setTimeout(() => {
+        next3()
+    }, 9000);
+    setTimeout(() => {
+        next4()
+    }, 12000);
+}

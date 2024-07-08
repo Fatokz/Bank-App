@@ -11,6 +11,7 @@ body {
     max-width: 448px;
     background-color: white !important;
     margin: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 #image {
@@ -22,7 +23,7 @@ body {
 }
 
 #form {
-    height: 517px;
+    height: 80vh;
     width: 100%;
     background-color: aliceblue;
     border-radius: 25px 25px 0 0;
@@ -60,14 +61,14 @@ body {
     color: #3b5998 !important;
 }
 
-#signUp h3{
+#signUp h3 {
     height: fit-content;
     width: 100%;
     text-align: center;
 }
 
 #contents {
-    height: 25em;
+    height: 65vh;
     width: 100%;
     overflow-y: auto;
     color: black;
@@ -91,7 +92,6 @@ body {
     /* background-color: rgba(250, 247, 247, 0.507); */
 }
 
-
 #pass {
     height: 40px;
     width: 90%;
@@ -110,21 +110,60 @@ body {
 #btns {
     margin-top: 15px !important;
     height: fit-content;
-    width: fit-content;
     margin: auto;
+}
+
+#register {
+    height: 45px;
 }
 
 a {
     text-decoration: none !important;
 }
 
+#load {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-::-webkit-scrollbar{
+.loader {
+    width: 15px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: l5 1s infinite linear alternate;
+}
+
+@keyframes l5 {
+    0% {
+        box-shadow: 20px 0 #ffc107, -20px 0 #FFFFFF;
+        background: #ffc107
+    }
+
+    33% {
+        box-shadow: 20px 0 #ffc107, -20px 0 #FFFFFF;
+        background: #FFFFFF
+    }
+
+    66% {
+        box-shadow: 20px 0 #FFFFFF, -20px 0 #ffc107;
+        background: #FFFFFF
+    }
+
+    100% {
+        box-shadow: 20px 0 #FFFFFF, -20px 0 #ffc107;
+        background: #ffc107
+    }
+}
+
+::-webkit-scrollbar {
     width: 5px;
     background-color: white;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: #ffc107;
     border-radius: 50px;
 }

@@ -45,8 +45,10 @@ function backArrow() {
 
 function spinners() {
     LoginAcc.innerHTML = `
-    <div class="spinner-border text-light loader" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div id="load">    
+    <div class="loader">
+        
+    </div>
     </div>
 `
 }

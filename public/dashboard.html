@@ -18,31 +18,37 @@
   <script src="https://kit.fontawesome.com/6f0fae15cd.js" crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth-compat.js"></script>
-  <title>SafeCoin Bank</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
+  <title>Dashboard || SafeCoin Bank</title>
 </head>
 
 <body>
   <main>
+    <div id="wrapper">
+      <div id="toast">
+          <div id="content">
+              <div id="icon"><img src="./Images/safecoinbg.png" alt=""></div>
+              <div id="details">
+                  <span>Message</span>
+                  <p id="message"></p>
+              </div>
+          </div>
+          <div id="close-icon" onclick="close()"><i class="fa-solid fa-circle-xmark"></i></div>
+      </div>
+  </div>
     <div id="container">
-      <nav>
-        nav
-      </nav>
+      <div id="dashboard">
+        <div id="damn">
 
-      <div id="account">
-        profile
+        </div>
+        <!-- <img src="./Images/smithmedia.png" alt=""> -->
       </div>
-
-      <div id="content">
-        content
-      </div>
-
-      <div id="ads">
-        ads
-      </div>
-
-      <footer>
-        footer
-      </footer>
     </div>
   </main>
 </body>

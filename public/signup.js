@@ -10,6 +10,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
+// Initialize Cloud Firestore and get a reference to the service
+const db = firebase.firestore();
 
 let signUps = document.getElementById("signUps")
 let signIn = document.getElementById("signIn")
@@ -23,6 +25,7 @@ let username = document.getElementById("username")
 let register = document.getElementById("register")
 let form = document.getElementById("form")
 let acc_details;
+let currentUser;
 
 
 eye.innerHTML = '<i class="fa-solid fa-eye-slash"></i>'
@@ -52,8 +55,10 @@ function showPassword() {
 
 function spinner() {
     register.innerHTML = `
-    <div class="spinner-border text-light loader" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div id="load">    
+    <div class="loader">
+        
+    </div>
     </div>
 `
 }
@@ -62,21 +67,17 @@ function spinner() {
 register.disabled = !register.disabled;
 
 function enable(event) {
-    // console.log(event.target.value)
     if (conpassword.value == "") {
         return
     }
     else if (password.value == conpassword.value) {
         register.disabled = !register.disabled
-        // console.log("password equal");
         return
     }
     else {
-        // console.log("password not correct");
         register.disabled = register
     }
 }
-
 
 function createAcc(event) {
     event.preventDefault()
@@ -94,6 +95,16 @@ function createAcc(event) {
     else {
         spinner()
 
+        let name = `${firstname.value.toUpperCase()} ${lastname.value.toUpperCase()}`;
+        let accountnum = document.getElementById("accountnum");
+
+        accountnum.style.display = "none"
+        for (let index = 1; index <= 10; index++) {
+            account = Math.floor(Math.random() * 10)
+            acc_details = accountnum.innerHTML += account
+        }
+        console.log(acc_details);
+
         firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
             .then((userCredential) => {
                 // Signed in 
@@ -102,19 +113,45 @@ function createAcc(event) {
                 user.updateProfile({
                     displayName: username.value,
                 }).then(() => {
-                    // Update successful
-                    // ...
-                    message.innerHTML = `<h2 class = "text-success">Registration Successfull</h2>`
-                    register.innerHTML = "Create Account"
-                    window.location.href = "ads.html"
-                    console.log(user);
-                    console.log(username.value);
+                    db.collection("user").doc(user.uid).set({
+                        username: user.displayName,
+                        dob: null,
+                        country: null,
+                        fullname : name,
+                        profile: null,
+                        account_num: acc_details,
+                        transaction_pin: null,
+                        email: user.email,
+                        wallet: 50000,
+                        transaction_history: [],
+                        time: new Date()
+                    })
+                        .then(() => {
+                            console.log("Signup Successful");
+                            message.innerHTML = `<h2 class = "text-success">Registration Successful</h2>`
+                            username.value = ""
+                            firstname.value = ""
+                            lastname.value = ""
+                            email.value = ""
+                            password.value = ""
+                            conpassword.value = ""
+                            register.innerHTML = "Create Account"
+                            window.location.href = "ads.html"
+                            console.log(user);
+                            console.log(username.value);
+                        })
+                        .catch((error) => {
+                            console.error("Error writing document: ", error);
+                            // message.innerHTML = `<h2 class = "text-danger">${error}</h2>`
+                            register.innerHTML = "Create Account"
+                        });
                 }).catch((error) => {
                     // An error occurred
                     // ...
                     console.log("Something went wrong", error);
+                    // message.innerHTML = `<h2 class = "text-danger">${error}</h2>`
+                    register.innerHTML = "Create Account"
                 });
-                // alert("Registration Successful")
 
             })
             .catch((error) => {
@@ -129,8 +166,8 @@ function createAcc(event) {
                 // ..
             });
     }
-}
 
+}
 
 function login() {
     window.location.href = "login.html"
