@@ -70,6 +70,8 @@ function gainAccess(ev) {
                 console.log(user);
                 // alert("Login Successful")
                 info.innerHTML = `<p class = "text-success"> Login Successfull</p>`
+                signedEmail.value = "";
+                signedPassword.value = "";
                 LoginAcc.innerHTML = "Login"
                 forms.style.display = "none"
                 dashboard()
@@ -83,8 +85,6 @@ function gainAccess(ev) {
                 LoginAcc.innerHTML = "Login"
             });
     }
-    signedEmail.value = "";
-    signedPassword.value = "";
 }
 
 

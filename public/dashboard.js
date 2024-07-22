@@ -1,3 +1,4 @@
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAB4RSOJNQMw2con6a24L2iZNtPeXXSLHk",
     authDomain: "safecoin-bank.firebaseapp.com",
@@ -12,6 +13,8 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+// Get HTML elements by ID
+let nav = document.getElementById("nav");
 let avatar = document.getElementById("avatar");
 let dashboard = document.getElementById("dashboard");
 let amount = document.getElementById("amount");
@@ -20,37 +23,49 @@ let number = document.getElementById("number");
 let coke = document.getElementById("coke");
 let wrapper = document.getElementById("wrapper");
 let message = document.getElementById("message");
+let banktransfer = document.getElementById("banktransfer");
 let currentUser;
 
+// Hide the wrapper initially
 wrapper.style.display = "none"
+banktransfer.style.display = "none"
+// dashboard.style.display = "none"
 
+
+// Array of image sources for the ad banner
 let gif = ['./Images/smithmedia.png', './Images/bank.gif', './Images/cocacola.gif', './Images/cocacola2.gif', './Images/fanta.gif', './Images/jumia.gif'];
 let index = 0;
 
-// Check if the element with id 'coke' exists
+// Check if the 'coke' element exists and set its source
 if (coke) {
     coke.src = gif[index];
 } else {
     console.error("Element with id 'coke' not found.");
 }
 
+// Function to check the authentication state and fetch user data
 function check() {
+    // Display a loader while fetching data
     dashboard.innerHTML = `
         <div id="dash">
             <div class="loader"></div>
         </div>
-`;
+    `;
 
+    // Check the user's authentication state
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             console.log(user);
             var uid = user.uid;
             currentUser = user
 
+            // Get the user's document from Firestore
             var docRef = db.collection("user").doc(uid);
             docRef.get().then((doc) => {
                 if (doc.exists) {
                     console.log("Document data:", doc.data());
+                    
+                    // Display the user's dashboard with data from Firestore
                     dashboard.innerHTML = `
                     <div id="nav">
                         <div class="d-flex justify-content-between align-items-center">
@@ -95,9 +110,9 @@ function check() {
                             </div>
                         </div>
                         <div id="transfer">
-                            <p>Money Transfer</p>
+                            <p>Make a Payment</p>
                             <div class="d-flex justify-content-between">
-                                <div id="tobank">
+                                <div id="tobank" onclick="banktf()">
                                     <i class="fa-solid fa-building-columns"></i>
                                     <p>To Bank</p>
                                 </div>
@@ -225,9 +240,11 @@ function check() {
 
                     </div>
                     `
+
+                    // Store the user's account number in local storage
                     let num = `${doc.data().account_num}`
                     let store = localStorage.setItem("Safecoin Acc", num)
-
+                    
                     // Re-select coke element and set src again
                     coke = document.getElementById("coke");
                     if (coke) {
@@ -245,23 +262,29 @@ function check() {
             });
         } else {
             // User is signed out
+            // If user is signed out, redirect to login page
             alert("Please login")
             window.location.href = "login.html"
         }
     });
 }
 
+// Call the check function to initialize the dashboard
 check()
 
+
+// Function to display the profile edit message
 function profile() {
     message.innerHTML = "Edit Profile";
     wrapper.style.display = "block";
 
+    // Hide the wrapper after 5 seconds
     setTimeout(() => {
         wrapper.style.display = "none";
     }, 3000);
 }
 
+// Function to display the notifications message
 function note() {
     message.innerHTML = "Notifications";
     wrapper.style.display = "block";
@@ -271,6 +294,7 @@ function note() {
     }, 3000);
 }
 
+// Function to display a "coming soon" message
 function pgs() {
     wrapper.style.display = "block"
     message.innerHTML = "Coming Soon"
@@ -280,6 +304,7 @@ function pgs() {
     }, 3000);
 }
 
+// Function to hide or show the amount field
 function hide() {
     if (!amount || !eye) {
         console.error("Elements with id 'amount' or 'eye' not found.");
@@ -295,7 +320,7 @@ function hide() {
     }
 }
 
-
+// Function to copy the account number to clipboard
 function copy() {
     let get = localStorage.getItem("Safecoin Acc")
     navigator.clipboard.writeText(get)
@@ -307,7 +332,7 @@ function copy() {
     }, 1000);
 }
 
-
+// Function to change the ad banner image every 5 seconds
 function next() {
     setInterval(() => {
         if (index == gif.length - 1) {
@@ -323,5 +348,22 @@ function next() {
     }, 5000);
 }
 
-
+// Call the next function to start the ad banner rotation
 next()
+
+function banktf() {
+    // var banktransfer = document.getElementById("banktransfer");
+    if (banktransfer) {
+        // nav.style.zIndex = "30"
+        dashboard.style.display = "none";
+        banktransfer.style.display = "block";
+        banktransfer.style.zIndex = "20";
+        // console.log("Working");
+    } else {
+        console.error("Element with ID 'banktransfer' not found.");
+    }
+}
+
+function todash() {
+    dashboard.style.display = "block"
+}

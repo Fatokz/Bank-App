@@ -452,6 +452,66 @@ body {
     color: white;
 }
 
+#banktransfer{
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    /* border: 2px solid #ffc107; */
+    padding: 0 15px 15px 15px;
+}
+
+#backarrow{
+    height: 55px;
+    width: 100%;
+    background-color: white;
+    padding: 10px 10px 10px 0;
+    top: 0;
+    z-index: 2;
+    position: sticky;
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+}
+
+#backs button{
+    width: 50px;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffc107;
+}
+
+#to{
+    height: 25px;
+}
+
+#menu{
+    height: 29px;
+}
+
+#menu button{
+    background: none;
+    border: none;
+    outline: none;
+    color: #ffc107;
+    width: 30px;
+    font-size: 20px;
+}
+
+#sectiontwo{
+    height: 100vh;
+    width: 100%;
+    /* background-color: #878787; */
+    padding: 20px 0 0 0;
+}
+
+#frombank{
+    height: 6em;
+    width: 100%;
+    background-color: #030b1d;
+    border-radius: 10px;
+    color: white;
+}
+
 #footer {
     height: 4em;
     width: 100%;
