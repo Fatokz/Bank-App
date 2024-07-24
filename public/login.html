@@ -19,6 +19,7 @@
     <script src="https://kit.fontawesome.com/6f0fae15cd.js" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <title>Login || SafeCoin Bank</title>
 </head>
 
@@ -36,12 +37,12 @@
                         <form action="#">
                             <p id="info"></p>
                             <p id="user">E-mail</p>
-                            <input type="email" name="" class="inpt" placeholder="E-mail" id="signedEmail" required>
+                            <input type="email" class="inpt" placeholder="E-mail" id="signedEmail" required>
                             <div class="">
                                 <p id="user">Password</p>
                             </div>
                             <div id="pass">
-                                <input  type="password" name="" class="inpts" placeholder="Password" id="signedPassword"
+                                <input type="password" class="inpts" placeholder="Password" id="signedPassword"
                                     required><span id="hide" onclick="hidePass()"></span>
                             </div>
                             <div>
@@ -49,18 +50,42 @@
                                     <a href="#" class="fs-6">Forgot password?</a>
                                 </div>
                                 <div id="">
-                                    <p class="fs-6 mt-2">Don't have accout? <a href="#" onclick="backArrow()"> Sign Up </a></p>
+                                    <p class="fs-6 mt-2">Don't have accout? <a href="#" onclick="backArrow()"> Sign Up
+                                        </a></p>
                                 </div>
                                 <div class="check">
                                     <input type="checkbox" checked> <span class="fs-6">Remember me</span>
                                 </div>
                             </div>
-                            <div id="btns" class="w-100 ">       
-                                <button class="btn btn-warning wawe w-100 mt-4" onclick="gainAccess(event)"
+                            <div id="btns" class="w-100 ">
+                                <button class="btn btn-warning btt w-100 mt-4" onclick="gainAccess(event)"
                                     id="LoginAcc">Login</button>
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+
+            <div id="setpin">
+                <div id="code">
+                    <h4>Set your PIN code</h4>
+                    <p>Set your <span>4 digits</span> PIN code to safeguard your personal information and enhance your
+                        account security.</p>
+                </div>
+
+                <div class="pin-container">
+                    <input type="number" maxlength="1" class="pin-box" id="pin1" oninput="moveToNext(this, 'pin2')"
+                        onkeydown="moveToPrevious(event, this, '')" required>
+                    <input type="number" maxlength="1" class="pin-box" id="pin2" oninput="moveToNext(this, 'pin3')"
+                        onkeydown="moveToPrevious(event, this, 'pin1')" required>
+                    <input type="number" maxlength="1" class="pin-box" id="pin3" oninput="moveToNext(this, 'pin4')"
+                        onkeydown="moveToPrevious(event, this, 'pin2')" required>
+                    <input type="number" maxlength="1" class="pin-box" id="pin4" oninput="moveToNext(this, '')"
+                        onkeydown="moveToPrevious(event, this, 'pin3')" required>
+                    <p id="infos" class="mt-2"></p>
+                </div>
+                <div id="create">
+                    <button id="pinset" onclick="create()" class="btn btn-warning  w-75 mt-4">Create PIN</button>
                 </div>
             </div>
 
@@ -75,9 +100,6 @@
                     <p>Building bridges to your financial future, one transaction at a time.</p>
                 </div>
                 <div id="dot" class="d-flex">
-                    <div id="dotss">
-
-                    </div>
                     <div id="dots">
 
                     </div>

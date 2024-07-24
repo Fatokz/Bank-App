@@ -24,16 +24,21 @@ let coke = document.getElementById("coke");
 let wrapper = document.getElementById("wrapper");
 let message = document.getElementById("message");
 let banktransfer = document.getElementById("banktransfer");
+let namefull = document.getElementById("namefull");
+let accnum1 = document.getElementById("accnum1");
+let capital = document.getElementById("capital");
+let numberInput = document.getElementById("numberInput");
 let currentUser;
 
-// Hide the wrapper initially
+// Hide the wrapper,banktransfer,dashboard initially
 wrapper.style.display = "none"
-banktransfer.style.display = "none"
-// dashboard.style.display = "none"
+banktransfer.style.display = "block"
+dashboard.style.display = "none"
+
 
 
 // Array of image sources for the ad banner
-let gif = ['./Images/smithmedia.png', './Images/bank.gif', './Images/cocacola.gif', './Images/cocacola2.gif', './Images/fanta.gif', './Images/jumia.gif'];
+let gif = ['./Images/bank.gif', './Images/cocacola.gif', './Images/cocacola2.gif', './Images/fanta.gif', './Images/jumia.gif'];
 let index = 0;
 
 // Check if the 'coke' element exists and set its source
@@ -64,7 +69,7 @@ function check() {
             docRef.get().then((doc) => {
                 if (doc.exists) {
                     console.log("Document data:", doc.data());
-                    
+
                     // Display the user's dashboard with data from Firestore
                     dashboard.innerHTML = `
                     <div id="nav">
@@ -89,7 +94,7 @@ function check() {
                         <div id="balance">
                             <div class="d-flex justify-content-between align-items-center high">
                                 <div id="avail">
-                                    <p>Available Balance <span id="eye" onclick="hide()"><i class="fa-solid fa-eye"></i></span></p>
+                                    <p>Current Balance <span id="eye" onclick="hide()"><i class="fa-solid fa-eye"></i></span></p>
                                     <input id="amount" value="&#8358; ${doc.data().wallet.toLocaleString()}" type="text" disabled>
                                 </div>
                                 <div id="line"></div>
@@ -110,7 +115,7 @@ function check() {
                             </div>
                         </div>
                         <div id="transfer">
-                            <p>Make a Payment</p>
+                            <p>Make Payment</p>
                             <div class="d-flex justify-content-between">
                                 <div id="tobank" onclick="banktf()">
                                     <i class="fa-solid fa-building-columns"></i>
@@ -123,6 +128,10 @@ function check() {
                                 <div id="withdraw">
                                     <i class="fa-solid fa-square-phone"></i>
                                     <p>Airtime</p>
+                                </div>
+                                <div id="tradecoin">
+                                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                                    <p>Trade coin</p>
                                 </div>
                             </div>
                         </div>
@@ -244,7 +253,7 @@ function check() {
                     // Store the user's account number in local storage
                     let num = `${doc.data().account_num}`
                     let store = localStorage.setItem("Safecoin Acc", num)
-                    
+
                     // Re-select coke element and set src again
                     coke = document.getElementById("coke");
                     if (coke) {
@@ -254,11 +263,11 @@ function check() {
                     }
                 } else {
                     console.log("No such document!");
-                    dashboard.innerHTML = "No user data found.";
+                    dashboard.innerHTML = '<p class="danger">No user data found.</p>';
                 }
             }).catch((error) => {
                 console.log("Error getting document:", error);
-                dashboard.innerHTML = `Error getting document:, ${error}`;
+                dashboard.innerHTML = `<p class="text-danger">Error getting document:, ${error}</p>`;
             });
         } else {
             // User is signed out
@@ -362,7 +371,77 @@ function banktf() {
     } else {
         console.error("Element with ID 'banktransfer' not found.");
     }
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            var uid = user.uid;
+            var docRef = db.collection("user").doc(uid);
+
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    namefull.innerHTML = doc.data().fullname
+                    accnum1.innerHTML = doc.data().account_num
+                    capital.innerHTML = `&#8358; ${doc.data().wallet.toLocaleString()}`
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        } else {
+            // User is signed out
+            // ...
+        }
+    });
 }
+
+numberInput.addEventListener('input', function () {
+    let maxLength = 10;
+    if (this.value.length > maxLength) {
+        this.value = this.value.slice(0, maxLength);
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    let obj = [];
+    fetch("https://nigerianbanks.xyz/")
+        .then(result => result.json())
+        .then(data => {
+            // console.log(data);
+            obj.push(data);
+            let allbanks = obj[0];
+            // console.log(allbanks);
+    
+            // Clear the container before adding new elements
+            fetchbank.innerHTML = '';
+    
+            for (let index = 0; index < allbanks.length; index++) {
+                let bank = allbanks[index];
+                // console.log(bank);
+                fetchbank.innerHTML += `
+                    <div id="bank" onclick="soon(event)">
+                        <img src="${bank.logo}" alt="Bank Logo">
+                        <p>${bank.name}</p>
+                    </div>
+                `;
+            }
+        });
+    
+});
+
+function soon(e) {
+    // alert("Our next update will include this feature")
+    message.innerHTML = "Our next update will include this feature";
+    wrapper.style.display = "block";
+
+    // Hide the wrapper after 5 seconds
+    setTimeout(() => {
+        wrapper.style.display = "none";
+    }, 3000);
+}
+
 
 function todash() {
     dashboard.style.display = "block"

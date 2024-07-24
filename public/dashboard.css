@@ -16,11 +16,7 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-top: 50px;
-    /* z-index: 5; */
-}
-
-#wrapper #toast#offline {
-    border-color: #ccc;
+    height: 7em;
 }
 
 #toast #content {
@@ -44,10 +40,6 @@ body {
     border-radius: 50%;
 }
 
-#toast#offline #content #icon {
-    background: #ccc;
-}
-
 #content #details {
     margin: 0 0 0 15px;
 }
@@ -58,7 +50,7 @@ body {
 }
 
 #details p {
-    color: #878787;
+    color: #030b1d;
 }
 
 #toast #close-icon {
@@ -129,7 +121,6 @@ body {
 #container {
     height: 100vh;
     max-width: 448px;
-    /* background-color: #030b1d !important; */
     background-color: white !important;
     margin: auto;
     overflow-y: scroll;
@@ -222,7 +213,6 @@ body {
 
 #ii i {
     padding: 0 0 0 12px;
-    /* background-color: red; */
 }
 
 #rela {
@@ -254,16 +244,16 @@ body {
 }
 
 #balance {
-    height: 7.5em;
+    height: 7em;
     width: 100%;
-    background-color: #152a5c;
+    background-color: #04112cef;
     border-radius: 15px;
     color: white;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .high {
-    height: 7em;
+    height: 6.5em;
     width: 100%;
     background-color: #030b1d;
     border-radius: 15px;
@@ -287,6 +277,7 @@ body {
     font-size: 16px;
     color: white;
     width: 8em;
+    font-family: "Roboto", sans-serif;
 }
 
 #line {
@@ -349,6 +340,7 @@ body {
 #number {
     height: 20px;
     margin-top: 4px;
+    font-family: "Roboto", sans-serif;
 }
 
 #transfer {
@@ -363,13 +355,14 @@ body {
 
 #tobank,
 #tosafe,
-#withdraw {
+#withdraw,
+#tradecoin {
     height: 35px;
     width: 30%;
     /* background-color: #152a5c; */
     color: #ffc107;
     margin: -12px 0 0 0;
-    font-size: 23px;
+    font-size: 20px;
     text-align: center;
     border-radius: 5px;
 }
@@ -453,18 +446,17 @@ body {
 }
 
 #banktransfer{
-    height: 100vh;
+    height: 125vh;
     width: 100%;
     background-color: white;
     /* border: 2px solid #ffc107; */
-    padding: 0 15px 15px 15px;
 }
 
 #backarrow{
-    height: 55px;
+    height: 70px;
     width: 100%;
     background-color: white;
-    padding: 10px 10px 10px 0;
+    padding: 10px 15px 0 15px;
     top: 0;
     z-index: 2;
     position: sticky;
@@ -496,12 +488,41 @@ body {
     width: 30px;
     font-size: 20px;
 }
+#marquee {
+    height: 24px;
+    width: 100%;
+    margin: 0 0 0 0 !important;
+    color: #030b1d;
+    /* background-color: red; */
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+#marquee small {
+    position: absolute;
+    transform: translateX(100%);
+    animation: scroll-left 20s linear infinite;
+}
+
+#marquee small i {
+    color: #030b1d;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
 
 #sectiontwo{
     height: 100vh;
     width: 100%;
-    /* background-color: #878787; */
-    padding: 20px 0 0 0;
+    padding: 0 15px 0 15px;
 }
 
 #frombank{
@@ -510,6 +531,144 @@ body {
     background-color: #030b1d;
     border-radius: 10px;
     color: white;
+    padding: 20px ;
+}
+
+#logo img{
+    height: 50px;
+    width: 50px;
+    border-radius: 20%;
+}
+
+#out{
+    line-height: 5px;
+    font-size: 14px;
+    height: 45px;
+    /* background-color: red; */
+}
+
+#out span{
+    font-family: "Roboto", sans-serif;
+}
+
+#beneficiary{
+    margin: 10px 0 0 0;
+}
+
+#newbene{
+    height: 5em;
+    width: 100%;
+    background-color: #030b1d;
+    border-radius: 10px;
+    color: white;
+    padding: 20px ;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#newbene input::placeholder{
+    font-size: 14px;
+}
+
+#banktf{
+    height: 2.5em;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #05173ee2;
+    padding: 0 10px 0 10px;
+}
+
+#banktf i{
+    font-size: 20px;
+    color: #ffc107;
+}
+
+#banktf input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    font-family: "Roboto", sans-serif;
+}
+
+#selectbene{
+    margin: 10px 0 0 0;
+}
+
+#map{
+    height: 25em;
+    width: 100%;
+    background-color: #030b1d;
+    border-radius: 10px;
+    overflow-x: scroll;
+}
+
+#map::-webkit-scrollbar{
+    display: none;
+}
+
+#allbene{
+    height: 5em;
+    width: 100%;
+    /* background-color: blue; */
+    border-radius: 10px 10px 0 0 ;
+    padding: 20px 15px 0 15px;
+}
+
+#search{
+    height: 2.5em;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #05173ee2;
+    padding: 0 10px 0 10px;
+}
+
+#search i{
+    font-size: 20px;
+    color: #ffc107;
+}
+
+#search input{
+    color: white;
+    outline: none;
+    background: transparent;
+    border: none;
+    width: 15em;
+}
+
+#search input::placeholder{
+    font-size: 14px;
+}
+
+#fetchbank{
+    height: fit-content;
+    width: 100%;
+    /* background-color: red; */
+    padding: 15px 25px;
+}
+
+#bank {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    color: white;
+}
+
+#bank img {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+#bank p{
+    margin-top: 12px;
+    font-size: 12px;
 }
 
 #footer {
@@ -523,6 +682,10 @@ body {
     z-index: 3;
     padding: 0 10px 0 10px;
 }
+
+/* #banktransfer{
+    display: none;
+} */
 
 @media (max-width : 1300px) {
     #footer {
@@ -568,6 +731,13 @@ body {
 }
 
 @media (max-width : 430px) {
+    #banktransfer{
+        height: 115vh;
+        width: 100%;
+        background-color: white;
+        /* border: 2px solid #ffc107; */
+    }
+
     #footer {
         height: 4em;
         width: 100%;

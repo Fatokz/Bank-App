@@ -2,6 +2,7 @@ body {
   background-color: white !important;
   font-family: "Raleway", sans-serif !important;
   background-image: url(./Images/pngwing.com.png);
+  scroll-behavior: smooth !important;
 }
 
 #container {
@@ -63,6 +64,7 @@ body {
   height: 35px;
 }
 
+
 #btns {
   margin-top: 15px !important;
   height: fit-content;
@@ -70,9 +72,108 @@ body {
   margin: auto;
 }
 
+#btns button {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
 a {
   text-decoration: none !important;
 }
+
+
+#setpin {
+  height: 100vh;
+  max-width: 448px;
+  background-color: aliceblue;
+  padding: 70px 15px 20px 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#setpin h4 {
+  font-weight: 600;
+}
+
+#setpin p {
+  color: gray;
+  width: 100%;
+  font-size: 16px;
+}
+
+#setpin span {
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#input {
+  height: 30px;
+  width: 100%;
+  text-align: center;
+  margin: 5em 0 0 0;
+}
+
+#infos {
+  color: red !important;
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+  height: 30px;
+  font-size: 13px !important;
+}
+
+.pin-container {
+  /* display: flex; */
+  gap: 10px;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  height: 20vh;
+  /* background-color: red; */
+  padding-top: 3em;
+}
+
+.pin-box {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.pin-box:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 5px rgba(255, 217, 0, 0.5);
+}
+
+#create {
+  height: fit-content;
+  width: 100%;
+  text-align: center;
+  margin: 9em 0 0 0;
+}
+
+#create button {
+  color: white;
+  font-weight: 600;
+  height: 40px;
+}
+
+/* #setpin{
+  display: none;
+} */
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* input[type="number"] {
+  -moz-appearance: textfield;
+} */
 
 #welcomepage {
   height: 100vh;
@@ -123,13 +224,6 @@ a {
   gap: 15px;
 }
 
-#dotss {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #0a0831;
-}
-
 #dots {
   height: 15px;
   width: 15px;
@@ -138,6 +232,14 @@ a {
 }
 
 #load {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loads {
   height: fit-content;
   width: 100%;
   display: flex;

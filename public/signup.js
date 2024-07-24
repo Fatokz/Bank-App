@@ -103,7 +103,6 @@ function createAcc(event) {
             account = Math.floor(Math.random() * 10)
             acc_details = accountnum.innerHTML += account
         }
-        console.log(acc_details);
 
         firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
             .then((userCredential) => {
@@ -122,7 +121,7 @@ function createAcc(event) {
                         account_num: acc_details,
                         transaction_pin: null,
                         email: user.email,
-                        wallet: 50000,
+                        wallet: 5000,
                         transaction_history: [],
                         time: new Date()
                     })

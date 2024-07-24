@@ -47,28 +47,79 @@
       <div id="dashboard">
         <!-- Fetching from javascript -->
       </div>
+
       <div id="banktransfer">
-        <div id="backarrow" class="d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
+        <div id="backarrow">
+          <div class="d-flex justify-content-between align-items-center">
             <div id="backs">
               <button onclick="todash()"><i class="fa-solid fa-arrow-left-long"></i></button>
             </div>
             <div id="to">
               <p>Transfer to Bank</p>
             </div>
+            <div id="menu">
+              <button><i class="fa-solid fa-clock-rotate-left"></i></button>
+              <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </div>
           </div>
-          <div id="menu">
-            <button><i class="fa-solid fa-clock-rotate-left"></i></button>
-            <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          <div id="marquee">
+            <small><i class="fa-solid fa-circle-exclamation"></i> Securing your future, one transaction at a
+              time.</small>
           </div>
         </div>
 
         <div id="sectiontwo">
-          <div id="frombank">
+          <div>
+            <small>Transfer From</small>
+            <div id="frombank">
+              <div class="d-flex align-items-center gap-3">
+                <div id="logo">
+                  <img src="./Images/safecoinbg.png" alt="">
+                </div>
+                <div id="out">
+                  <p><strong id="namefull"></strong></p>
+                  <p>Account Number: <span id="accnum1"></span></p>
+                  <p>Balance: <span id="capital">&#8358;</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div id="beneficiary">
+            <small>New Beneficiary</small>
+            <div id="newbene">
+              <div id="banktf" class="d-flex gap-3 align-items-center">
+                <div>
+                  <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div>
+                  <input type="number" placeholder="Account Number" id="numberInput" maxlength="10">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="selectbene">
+            <small>Select Beneficiary</small>
+            <div id="map">
+              <div id="allbene">
+                <div id="search" class="d-flex align-items-center gap-3">
+                  <div>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </div>
+                  <div>
+                    <input type="text" placeholder="Search for a bank...">
+                  </div>
+                </div>
+              </div>
+              <div id="fetchbank">
+                
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </main>
 </body>
