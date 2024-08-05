@@ -56,9 +56,7 @@ function showPassword() {
 function spinner() {
     register.innerHTML = `
     <div id="load">    
-    <div class="loader">
-        
-    </div>
+        <div class="loader"></div>
     </div>
 `
 }
@@ -98,12 +96,6 @@ function createAcc(event) {
         let name = `${firstname.value.toUpperCase()} ${lastname.value.toUpperCase()}`;
         let accountnum = document.getElementById("accountnum");
 
-        accountnum.style.display = "none"
-        for (let index = 1; index <= 10; index++) {
-            account = Math.floor(Math.random() * 10)
-            acc_details = accountnum.innerHTML += account
-        }
-
         firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
             .then((userCredential) => {
                 // Signed in 
@@ -112,10 +104,15 @@ function createAcc(event) {
                 user.updateProfile({
                     displayName: username.value,
                 }).then(() => {
+                    accountnum.style.display = "none"
+                    for (let index = 1; index <= 10; index++) {
+                        account = Math.floor(Math.random() * 10)
+                        acc_details = accountnum.innerHTML += account
+                    }
                     db.collection("user").doc(user.uid).set({
                         username: user.displayName,
                         dob: null,
-                        country: null,
+                        country: "Nigeria",
                         fullname : name,
                         profile: null,
                         account_num: acc_details,
@@ -126,7 +123,7 @@ function createAcc(event) {
                         time: new Date()
                     })
                         .then(() => {
-                            console.log("Signup Successful");
+                            // console.log("Signup Successful");
                             message.innerHTML = `<h2 class = "text-success">Registration Successful</h2>`
                             username.value = ""
                             firstname.value = ""
@@ -137,7 +134,7 @@ function createAcc(event) {
                             register.innerHTML = "Create Account"
                             window.location.href = "ads.html"
                             console.log(user);
-                            console.log(username.value);
+                            // console.log(username.value);
                         })
                         .catch((error) => {
                             console.error("Error writing document: ", error);
@@ -171,3 +168,4 @@ function createAcc(event) {
 function login() {
     window.location.href = "login.html"
 }
+

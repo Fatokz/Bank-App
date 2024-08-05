@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,23 +39,55 @@
               <!-- Sign Up form -->
               <form action="#">
                 <p id="user">Username</p>
-                <input type="text" name="" class="inpt" placeholder="Username" id="username" required>
+                <div class="usertie d-flex align-items-center">
+                  <div class="fs-4 tie">
+                    <i class="fa-solid fa-user-tie"></i>
+                  </div>
+                  <input type="text" class="inpt" placeholder="Username" id="username" required>
+                </div>
                 <p id="user">Firstname</p>
-                <input type="text" name="" class="inpt" placeholder="Firstname" id="firstname" required>
+                <div class="usertie d-flex align-items-center">
+                  <div class="fs-4 tie">
+                    <i class="fa-regular fa-user"></i>
+                  </div>
+                  <input type="text" class="inpt" placeholder="Firstname" id="firstname" required>
+                </div>
                 <p id="user">Lastname</p>
-                <input type="text" name="" class="inpt" placeholder="Lastname" id="lastname" required>
+                <div class="usertie d-flex align-items-center">
+                  <div class="fs-4 tie">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <input type="text" class="inpt" placeholder="Lastname" id="lastname" required>
+                </div>
                 <p id="user">E-mail</p>
-                <input type="email" name="" class="inpt" placeholder="E-mail" id="email" required>
+                <div class="usertie d-flex align-items-center">
+                  <div class="fs-4 tie">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <input type="email" class="inpt" placeholder="E-mail" id="email" required>
+                </div>
                 <p id="user">Password</p>
-                <div id="pass">
-                  <input type="password" name="" class="inpts" placeholder="Password" id="password" required><span
-                    id="eye" onclick="showPass()"></span>
+                <div class="usertie d-flex align-items-center">
+                  <div class="fs-4 tie">
+                    <i class="fa-solid fa-key"></i>
+                  </div>
+                  <div id="pass">
+                    <input type="password" class="inpts" placeholder="Password" id="password" required><span id="eye"
+                      onclick="showPass()"></span>
+                  </div>
                 </div>
+               
                 <p id="user">Confirm Password</p>
-                <div id="pass">
-                  <input oninput="enable(event)" type="password" name="" class="inpts" placeholder="Confirm Password" id="conpassword"
-                    required><span id="show" onclick="showPassword()"></span>
+                <div class="usertie d-flex align-items-center">
+                  <div class="fs-4 tie">
+                    <i class="fa-solid fa-lock"></i>
+                  </div>
+                  <div id="pass">
+                    <input oninput="enable(event)" type="password" class="inpts" placeholder="Confirm Password"
+                      id="conpassword" required><span id="show" onclick="showPassword()"></span>
+                  </div>
                 </div>
+
                 <div class="mt-2">
                   <input type="checkbox" id="checker" checked> <span>Agreed to all terms and conditions</span>
                 </div>

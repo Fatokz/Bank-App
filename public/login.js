@@ -104,7 +104,7 @@ function gainAccess(ev) {
                                 }
                             }
                             window.location.href = "dashboard.html"
-        
+
                         }).catch((error) => {
                             console.log("Error getting document:", error);
                         });
@@ -159,13 +159,26 @@ function dashboard() {
 }
 
 
+// // Function to move to the next input field in the PIN input sequence
+// function moveToNext(current, nextFieldID) {
+//     if (current.value.length === 1 && nextFieldID !== "") {
+//         document.getElementById(nextFieldID).focus();
+//     }
+// }
+
+
 // Function to move to the next input field in the PIN input sequence
 function moveToNext(current, nextFieldID) {
-    if (current.value.length === 1 && nextFieldID !== "") {
-        document.getElementById(nextFieldID).focus();
+    if (current.value.length > 1) {
+        current.value = current.value.slice(0, 1);
+    }
+    if (current.value.length === 1) {
+        // current.value = '*';
+        if (nextFieldID !== "") {
+            document.getElementById(nextFieldID).focus();
+        }
     }
 }
-
 
 // Function to move to the previous input field when the backspace key is pressed
 function moveToPrevious(event, current, previousFieldID) {
@@ -214,8 +227,8 @@ transformation();
 // Function to create a PIN and save it to Firestore
 function create() {
     if (pin1.value == "" || pin2.value == "" || pin3.value == "" || pin4.value == "") {
-        console.log("PIN must be up to 4 digits");
-        infos.innerHTML = "PIN must be up to 4 digits"
+        // console.log("PIN must be up to 4 digit");
+        infos.innerHTML = "PIN must be up to 4 digit"
         return;
     } else {
         spinner()

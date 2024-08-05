@@ -83,20 +83,37 @@ body {
     margin: 10px 0 -1px 0;
 }
 
-.inpt {
-    background-color: transparent;
+.usertie {
     border: 2px solid #ffc107;
     width: 90%;
     height: 40px;
     border-radius: 5px;
-    /* background-color: rgba(250, 247, 247, 0.507); */
+}
+
+.tie {
+    height: 36px;
+    width: 1.7em;
+    background-color: #ffc107;
+    border-radius: 3px 0 0 3px;
+    color: #000000;
+    padding: 0 0 0 9px;
+}
+
+.inpt {
+    background: transparent;
+    width: 90%;
+    border: none;
+    height: 36px;
+    outline: none;
+    border-radius: 0 3px 3px 0;
+    padding: 0 0 0 7px;
 }
 
 #pass {
-    height: 40px;
-    width: 90%;
-    border: 2px solid #ffc107;
-    border-radius: 5px;
+    height: 36px;
+    width: 91%;
+    /* border: 2px solid #ffc107; */
+    border-radius: 0 3px 3px 0;
 }
 
 .inpts {
@@ -104,7 +121,8 @@ body {
     outline: none;
     border: none;
     width: 90%;
-    height: 35px;
+    height: 36px;
+    padding: 0 0 0 7px;
 }
 
 #btns {
