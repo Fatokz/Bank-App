@@ -9,6 +9,7 @@ const firebaseConfig = {
     measurementId: "G-72DTH8MZ32"
 };
 
+
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
@@ -18,6 +19,7 @@ const db = firebase.firestore();
 let nav = document.getElementById("nav");
 let avatar = document.getElementById("avatar");
 let dashboards = document.getElementById("dashboard");
+let tradeCoin = document.getElementById("tradeCoin");
 let amount = document.getElementById("amount");
 let eye = document.getElementById("eye");
 let number = document.getElementById("number");
@@ -44,7 +46,7 @@ let paymentContainer = document.getElementById("paymentContainer");
 let inifunds = document.getElementById("inifunds");
 let xmark = document.getElementById("xmark");
 let infos = document.getElementById("infos");
-let pinset = document.getElementById("pinset");
+let processMoney = document.getElementById("processMoney");
 let pinBoxes = document.querySelectorAll(".pin-box");
 let imageProfile = document.getElementById("imageProfile");
 let nameProfile = document.getElementById("nameProfile");
@@ -55,8 +57,10 @@ let dob = document.getElementById("dob");
 let editProfile = document.getElementById("editProfile");
 let fileInput = document.getElementById("fileInput");
 let nigeria = document.getElementById("nigeria");
+let payamt = document.getElementById("payamt");
+let userWallet = document.getElementById("userWallet");
+let coinInfo = document.getElementById('coinInfo');
 
-// let allpins = `${pin1.value, pin2.value, pin3.value, pin4.value}`
 
 let currentUser;
 let currentUserId;
@@ -73,6 +77,7 @@ amountpay.style.display = "none"
 floatingContainer.style.display = "none"
 paymentContainer.style.display = "none"
 editProfile.style.display = "none"
+tradeCoin.style.display = "none"
 
 infos.innerHTML = ""
 
@@ -90,14 +95,14 @@ function loadFile(event) {
 
 
 // Array of image sources for the ad banner
-let gif = ['./Images/bank.gif', './Images/cocacola.gif', './Images/cocacola2.gif', './Images/fanta.gif', './Images/jumia.gif'];
+let gif = ['./Images/cocacola.gif', './Images/bank.gif', './Images/cocacola2.gif', './Images/fanta.gif', './Images/jumia.gif'];
 let index = 0;
 
 // Check if the 'coke' element exists and set its source
 if (coke) {
     coke.src = gif[index];
 } else {
-    console.error("Element with id 'coke' not found.");
+    // console.error("Element with id 'coke' not found.");
 }
 
 // Function to check the authentication state and fetch user data
@@ -132,6 +137,7 @@ function check() {
                     semiNum.innerHTML = currentUser.account_num
                     dob.innerHTML = currentUser.dob || "Not Provided"
                     nigeria.innerHTML = currentUser.country
+                    userWallet.innerHTML = currentUser.username
 
 
                     // Display the user's dashboard with data from Firestore
@@ -194,7 +200,7 @@ function check() {
                                     <p>Airtime</p>
                                 </div>
                                 <div id="tradecoin">
-                                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                                    <i onclick="tradeWallet()" class="fa-solid fa-money-bill-trend-up"></i>
                                     <p>Trade coin</p>
                                 </div>
                             </div>
@@ -211,106 +217,106 @@ function check() {
                         <div id="services">
                             <div class="offers">
                                 <div class="offer">
-                                    <i onclick="pgs()" class="fa-solid fa-bolt"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-bolt"></i>
                                     <p>Electricity</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-wifi"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-wifi"></i>
                                     <p>Data Bundle</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-basketball"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-basketball"></i>
                                     <p>Betting Fund</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-tv"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-tv"></i>
                                     <p>TV</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-money-bills"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-money-bills"></i>
                                     <p>Pay Bill</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-user-plus"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-user-plus"></i>
                                     <p>Refer and earn</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-wallet"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-wallet"></i>
                                     <p>Wallet</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-sack-dollar"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-sack-dollar"></i>
                                     <p>CashBox</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-brands fa-bitcoin"></i>
+                                    <i onclick="pgs(event)" class="fa-brands fa-bitcoin"></i>
                                     <p>Trade your coin</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-piggy-bank"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-piggy-bank"></i>
                                     <p>Savings</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-code"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-code"></i>
                                     <p>Learn to code</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-user-tie"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-user-tie"></i>
                                     <p>Avatar</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-gifts"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-gifts"></i>
                                     <p>Giveaway Gifts</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-store"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-store"></i>
                                     <p>Pay Shop</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-cart-shopping"></i>
                                     <p>Shop Online</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-taxi"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-taxi"></i>
                                     <p>Uber</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-jet-fighter"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-jet-fighter"></i>
                                     <p>Travels and Tour</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-trophy"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-trophy"></i>
                                     <p>Win Big</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-money-bill-transfer"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-money-bill-transfer"></i>
                                     <p>Transfer Bill</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-fire-flame-curved"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-fire-flame-curved"></i>
                                     <p>Insurance</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-ticket"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-ticket"></i>
                                     <p>Ticket</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-gift"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-gift"></i>
                                     <p>Reward</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-language"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-language"></i>
                                     <p>Language</p>
                                 </div>
                                 <div class="offer">
-                                    <i class="fa-solid fa-school"></i>
+                                    <i onclick="pgs(event)" class="fa-solid fa-school"></i>
                                     <p>School</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id="footer">
-
+                        
                     </div>
                     `
 
@@ -323,7 +329,7 @@ function check() {
                     if (coke) {
                         coke.src = gif[index];
                     } else {
-                        console.error("Element with id 'coke' not found after setting dashboard content.");
+                        // console.error("Element with id 'coke' not found after setting dashboard content.");
                     }
                 } else {
                     console.log("No such document!");
@@ -371,13 +377,14 @@ function note() {
 }
 
 // Function to display a "coming soon" message
-function pgs() {
+function pgs(event) {
     wrapper.style.display = "block"
     message.innerHTML = "Coming Soon"
 
     setTimeout(() => {
         wrapper.style.display = "none"
     }, 3000);
+    return event;
 }
 
 // Function to hide or show the amount field
@@ -413,6 +420,7 @@ function copy() {
 
 // Function to change the ad banner image every 5 seconds
 function next() {
+    let coke = document.getElementById("coke")
     setInterval(() => {
         if (index == gif.length - 1) {
             index = 0;
@@ -422,14 +430,13 @@ function next() {
         if (coke) {
             coke.src = gif[index];
         } else {
-            console.error("Element with id 'coke' not found.");
+            // console.error("Element with id 'coke' not found.");
         }
     }, 5000);
 }
 
 // Call the next function to start the ad banner rotation
 next()
-
 
 
 function banktf() {
@@ -621,7 +628,7 @@ proceed.addEventListener("click", function () {
                                 return;
                             } else {
                                 querySnapshot.forEach((doc) => {
-                                    console.log(doc.id, " => ", doc.data());
+                                    // console.log(doc.id, " => ", doc.data());
                                     receiverId = doc.id;
                                     receiver = doc.data();
                                     innerthl.innerHTML = `
@@ -698,7 +705,7 @@ proceed.addEventListener("click", function () {
 
 function inptamt() {
     let amounts = document.getElementById("amounts").value;
-    console.log(amounts);
+    // console.log(amounts);
     if (amounts == "") {
         let inifunds = document.getElementById("inifunds");
         inifunds.innerHTML = ""
@@ -737,10 +744,10 @@ function validateInput(event) {
     if (!/[\d.]/.test(key) && key !== 'Backspace') {
         event.preventDefault();
     }
-}
 
-// Attach the validateInput function to the keydown event
-amounts.addEventListener('keydown', validateInput);
+    // Attach the validateInput function to the keydown event
+    amounts.addEventListener('keydown', validateInput);
+}
 
 
 function sendFunds() {
@@ -751,16 +758,18 @@ function sendFunds() {
     let accNum3 = document.getElementById("accNum3");
     let reciName = document.getElementById("reciName");
     let currBal = document.getElementById("currBal");
+    let payamt = document.getElementById("payamt");
+
 
     displayAmount.innerHTML = amounts
     paymont.innerHTML = amounts
     accNum3.innerHTML = receiver.account_num
     reciName.innerHTML = receiver.fullname
     currBal.innerHTML = currentUser.wallet.toLocaleString()
-
+    payamt.innerHTML = amounts
     // Remove commas for conversion
     numericValue = +(amounts.replace(/,/g, ''));
-    console.log("Numeric value:", numericValue);
+    // console.log("Numeric value:", numericValue);
     if (amounts == "") {
         inifunds.innerHTML = `
         <div class="shake" id="users">
@@ -793,6 +802,7 @@ function sendFunds() {
             return;
         }
     } else {
+        sect4.classList.toggle("disabled")
         let inifunds = document.getElementById("inifunds");
         inifunds.innerHTML = ""
         amtsend.style.height = "10.5em"
@@ -807,6 +817,7 @@ function sendFunds() {
 }
 
 function prev() {
+    sect4.classList.remove("disabled")
     floatingContainer.style.display = "none"
     paymentContainer.style.display = "none"
     proceed.disabled = true;
@@ -815,7 +826,18 @@ function prev() {
     banktransfer.style.display = "block"
 }
 
+function tradeWallet() {
+    tradeCoin.style.display = "block"
+    dashboards.style.display = "none"
+}
+
+function fromWallet() {
+    tradeCoin.style.display = "none"
+    dashboards.style.display = "block"
+}
+
 function closeFloatingContainer() {
+    sect4.classList.remove("disabled")
     let floatingContainer = document.getElementById("floatingContainer");
     floatingContainer.classList.remove("float-up");
     void floatingContainer.offsetWidth;
@@ -837,6 +859,7 @@ function confirm() {
 }
 
 function closepaymentContainer() {
+    sect4.classList.remove("disabled")
     let paymentContainer = document.getElementById("paymentContainer");
     paymentContainer.classList.remove("float-up");
     void paymentContainer.offsetWidth;
@@ -852,9 +875,10 @@ function closepaymentContainer() {
     infos.innerHTML = ""
 }
 
-//
+
 pinBoxes.forEach((input) => {
     input.addEventListener("input", handleInput);
+    input.addEventListener("keydown", handleBackspace);
 });
 
 function handleInput(event) {
@@ -867,74 +891,137 @@ function handleInput(event) {
     }
 }
 
-function sendFund() {
+function handleBackspace(event) {
+    const input = event.target;
+    if (event.key === "Backspace" && input.value === '') {
+        const previousInput = input.previousElementSibling;
+        if (previousInput && previousInput.classList.contains("pin-box")) {
+            previousInput.focus();
+        }
+    }
+}
+
+async function sendFund() {
     let pinValue = "";
     pinBoxes.forEach(input => {
         pinValue += input.value;
     });
-    if (pinValue == "") {
-        infos.innerHTML = "Input field can't be empty"
+
+    if (pinValue === "") {
+        infos.innerHTML = "Input field can't be empty";
         return;
-    } else if (+pinValue === currentUser.transaction_pin) {
-        infos.innerHTML = "<p class='text-success'>Processing ...</p>"
-        console.log(+pinValue);
-        console.log("Amount to send", numericValue);
+    }
 
-        var currentUserRef = db.collection("user").doc(currentUserId);
-        var receiverRef = db.collection("user").doc(receiverId);
+    if (+pinValue !== currentUser.transaction_pin) {
+        infos.innerHTML = "Invalid pin, Try again";
+        return;
+    }
 
-        // Set the "capital" field of the city 'DC'
-        return currentUserRef.update({
+    infos.innerHTML = "<p class='text-success'>Processing ...</p>";
+
+    try {
+        // Get the current date and time
+        const timestamp = new Date();
+
+        // Update current user's wallet
+        await db.collection("user").doc(currentUserId).update({
             wallet: currentUser.wallet - numericValue
-        })
-            .then(() => {
-                return receiverRef.update({
-                    wallet: receiver.wallet + numericValue
-                }).then(() => {
-                    currentUserRef.update({
-                        transaction_history: firebase.firestore.FieldValue.arrayUnion({
-                            amount: numericValue,
-                            message: `You transferred ${(numericValue)} to ${receiver.fullname}`,
-                            transaction_type: "Debit"
-                        })
-                    });
-                    receiverRef.update({
-                        transaction_history: firebase.firestore.FieldValue.arrayUnion({
-                            amount: numericValue,
-                            message: `You received ${(numericValue)} from ${currentUser.fullname}`,
-                            transaction_type: "Credit"
-                        })
-                    });
+        });
+        // 
+        // Update receiver's wallet
+        await db.collection("user").doc(receiverId).update({
+            wallet: receiver.wallet + numericValue
+        });
 
-                    alert("Transaction successfull")
-                    infos.innerHTML = "<p class='text-success'>Transaction successfull</p>"
-                    pinBoxes.forEach(input => {
-                        input.value = ''; // Clear the value of each input field
-                    });
-                    pinBoxes[0].focus(); // Optionally focus the first input field after clearing
-                    infos.innerHTML = ""
+        // Update current user's transaction history
+        await db.collection("user").doc(currentUserId).update({
+            transaction_history: firebase.firestore.FieldValue.arrayUnion({
+                amount: numericValue,
+                message: `You transferred ${numericValue} to ${receiver.fullname}`,
+                transaction_type: "Debit",
+                date: timestamp.toLocaleDateString(), // Store date
+                time: timestamp.toLocaleTimeString()  // Store time
+            })
+        });
 
-                    // Update wallet balances in the DOM
-                    check()
-                    window.location.reload()
-                    
-                })
-                    .catch((error) => {
-                        // The document probably doesn't exist.
-                        console.error("Error updating document: ", error);
-                    });
-            }).catch((error) => {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            });
+        // Update receiver's transaction history
+        await db.collection("user").doc(receiverId).update({
+            transaction_history: firebase.firestore.FieldValue.arrayUnion({
+                amount: numericValue,
+                message: `You received ${numericValue} from ${currentUser.fullname}`,
+                transaction_type: "Credit",
+                date: timestamp.toLocaleDateString(),
+                time: timestamp.toLocaleTimeString()
+            })
+        });
 
-    } else {
-        infos.innerHTML = "Invalid pin, Try again"
+        // alert("Transaction successful");
+        infos.innerHTML = "<p class='text-success'>Transaction successful</p>";
+
+        // Clear PIN input fields
+        pinBoxes.forEach(input => {
+            input.value = ''; // Clear the value of each input field
+        });
+
+        // Optionally focus the first input field after clearing
+        pinBoxes[0].focus();
+
+        let amount = document.getElementById("amount");
+        amount.value = `${amount + numericValue}`;
+        // Optionally reload the page
+        window.location.reload();
+        return;
+
+    } catch (error) {
+        console.error("Error updating document: ", error);
+        infos.innerHTML = "<p class='text-danger'>Transaction failed. Please try again later.</p>";
+        return;
     }
 }
 
 
-function logOut (){
+function BTCoin() {
+    const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
+    // Fetch data from the API
+    fetch(url)
+        .then(response => response.json())  // Parse the JSON from the response
+        .then(data => {
+            // Log the entire response
+            // console.log(data);
+
+            // Map through the data to extract specific details
+            data.forEach(coin => {
+                // Display the information on the page
+              coinflex.innerHTML += `
+              <div id="borderline" class="d-flex justify-content-between">
+                    <div id="coinInfo">
+                        <img src="${coin.image}" alt="">
+                        <div id="eachCoin">
+                        <srtong>${coin.name} (${coin.symbol.toUpperCase()})</srtong>
+                        <p class="text-secondary">$${coin.current_price}  <span class="text-success">+${coin.high_24h.toFixed(2)}%</span> </p>
+                    </div>
+                </div>
+                
+                <div id="nthCoin" class="mt-2">
+                    <strong class="text-light">0</strong>
+                    <p class="text-secondary">$0.00</p>
+                </div>
+             </div>
+              `
+                ;
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+}
+
+// Call the function to fetch and display the data
+BTCoin();
+
+
+
+function logOut() {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
         window.location.href = "login.html"

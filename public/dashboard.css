@@ -3,6 +3,12 @@ body {
     background-image: url(./Images/pngwing.com.png);
     width: 100%;
     background-size: cover;
+    box-sizing: border-box;
+    /* background-image: url(./Images/geometric-intersection.png); */
+    /* background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3Ccircle stroke='%23D60' vector-effect='non-scaling-stroke' id='a' fill='none' stroke-width='5' r='315'/%3E%3Cuse id='f' href='%23a' stroke-dasharray='100 100 100 9999'/%3E%3Cuse id='b' href='%23a' stroke-dasharray='250 250 250 250 250 9999'/%3E%3Cuse id='e' href='%23a' stroke-dasharray='1000 500 1000 500 9999'/%3E%3Cuse id='g' href='%23a' stroke-dasharray='1500 9999'/%3E%3Cuse id='h' href='%23a' stroke-dasharray='2000 500 500 9999'/%3E%3Cuse id='j' href='%23a' stroke-dasharray='800 800 800 800 800 9999'/%3E%3Cuse id='k' href='%23a' stroke-dasharray='1200 1200 1200 1200 1200 9999'/%3E%3Cuse id='l' href='%23a' stroke-dasharray='1600 1600 1600 1600 1600 9999'/%3E%3C/defs%3E%3Cg transform='translate(1000 750)' %3E%3Cg transform='rotate(0 0 0)' %3E%3Ccircle fill='%23D60' r='10'/%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23f' transform='scale(.1) rotate(50 0 0)' /%3E%3Cuse href='%23f' transform='scale(.2) rotate(100 0 0)' /%3E%3Cuse href='%23f' transform='scale(.3) rotate(150 0 0)' /%3E%3C/g%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23b' transform='scale(.4) rotate(200 0 0)' /%3E%3Cuse href='%23z' transform='scale(.5) rotate(250 0 0)' /%3E%3C/g%3E%3Cg id='z' transform='rotate(0 0 0)'%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23b'/%3E%3Cuse href='%23b' transform='scale(1.2) rotate(90 0 0)' /%3E%3Cuse href='%23b' transform='scale(1.4) rotate(60 0 0)' /%3E%3Cuse href='%23e' transform='scale(1.6) rotate(120 0 0)' /%3E%3Cuse href='%23e' transform='scale(1.8) rotate(30 0 0)' /%3E%3C/g%3E%3C/g%3E%3Cg id='y' transform='rotate(0 0 0)'%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23e' transform='scale(1.1) rotate(20 0 0)' /%3E%3Cuse href='%23g' transform='scale(1.3) rotate(-40 0 0)' /%3E%3Cuse href='%23g' transform='scale(1.5) rotate(60 0 0)' /%3E%3Cuse href='%23h' transform='scale(1.7) rotate(-80 0 0)' /%3E%3Cuse href='%23j' transform='scale(1.9) rotate(100 0 0)' /%3E%3C/g%3E%3C/g%3E%3Cg transform='rotate(0 0 0)'%3E%3Cg transform='rotate(0 0 0)'%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23h' transform='scale(2) rotate(60 0 0)'/%3E%3Cuse href='%23j' transform='scale(2.1) rotate(120 0 0)'/%3E%3Cuse href='%23j' transform='scale(2.3) rotate(180 0 0)'/%3E%3Cuse href='%23h' transform='scale(2.4) rotate(240 0 0)'/%3E%3Cuse href='%23j' transform='scale(2.5) rotate(300 0 0)'/%3E%3C/g%3E%3Cuse href='%23y' transform='scale(2) rotate(180 0 0)' /%3E%3Cuse href='%23j' transform='scale(2.7)'/%3E%3Cuse href='%23j' transform='scale(2.8) rotate(45 0 0)'/%3E%3Cuse href='%23j' transform='scale(2.9) rotate(90 0 0)'/%3E%3Cuse href='%23k' transform='scale(3.1) rotate(135 0 0)'/%3E%3Cuse href='%23k' transform='scale(3.2) rotate(180 0 0)'/%3E%3C/g%3E%3Cuse href='%23k' transform='scale(3.3) rotate(225 0 0)'/%3E%3Cuse href='%23k' transform='scale(3.5) rotate(270 0 0)'/%3E%3Cuse href='%23k' transform='scale(3.6) rotate(315 0 0)'/%3E%3Cuse href='%23k' transform='scale(3.7)'/%3E%3Cuse href='%23k' transform='scale(3.9) rotate(75 0 0)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-repeat: no-repeat; */
 }
 
 #wrapper #toast {
@@ -219,7 +225,7 @@ body {
     width: 20px;
     border-radius: 50%;
     background-color: #ffc107;
-    margin: -19px 0 0 6.2em;
+    margin: -19px 0 0 5.8em;
     font-size: 13px;
     border-radius: 2px solid white;
 }
@@ -235,11 +241,126 @@ body {
 }
 
 #tier {
-    height: 30vh;
+    height: 32vh;
     width: 100%;
-    border: 2px solid #ffc107;
     margin: 10px 0 10px 0;
     border-radius: 10px;
+    background-color: #030b1d;
+    padding: 10px;
+}
+
+#kyc{
+    height: 20px;
+    width: 100%;
+    margin-top: 6px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    padding-top: 13px;
+}
+
+#progress{
+    height: 70px;
+    width: 100%;
+    /* background-color: red; */
+    margin-top: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.www{
+    width: 93%;
+    margin: auto;
+}
+
+#proload1{
+    height: 7px;
+    width: 49%;
+    background-color: rgba(227, 216, 216, 0.614);
+}
+
+#cheeck{
+    color: #ffc107;
+    position: absolute;
+    background-color: #030b1d;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    font-size: 25px;
+    margin: -10px 0 0 0;
+}
+
+#cheeck p{
+    margin-top: -5px;
+}
+
+#lvl{
+    height: 30px;
+    width: 50px;
+    background-color: #ffc107;
+    margin-top: 19px;
+    padding: 5px;
+    color: #030b1d;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    position: relative;
+    border-radius: 7px;
+}
+
+#lvls{
+    height: 30px;
+    width: 50px;
+    background-color: transparent;
+    margin-top: 19px;
+    padding: 5px;
+    color: grey;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    position: relative;
+    border-radius: 7px;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid #ffc107;
+    position: absolute;
+    margin: -3.5em 0 0 15px;
+}
+
+#warnings{
+    height: 50px;
+    width: 95%;
+    background-color: #06173aef;
+    /* background-color: red; */
+    margin: auto;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    /* line-height: 16px; */
+    gap: 6px;
+    align-items: center;
+}
+
+#warnings p{
+    width: 85%;
+    font-size: 13px;
+    color: white;
+    height: 25px;
+}
+
+#pont{
+    height: 40px;
+    width: 30px;
+    color: #ffc107;
+    padding: 5px;
+    font-size: 22px;
 }
 
 #personalInfo {
@@ -312,7 +433,7 @@ body {
     padding: 3px;
 }
 
-.reds{
+.reds {
     color: red;
 }
 
@@ -358,6 +479,184 @@ body {
     height: 50px;
     width: 50px;
     border-radius: 50%;
+}
+
+#tradeCoin {
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    display: none;
+}
+
+
+
+.wallicons {
+    font-size: 19px;
+    cursor: pointer;
+}
+
+#walletSec {
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    top: 0;
+    position: sticky;
+    z-index: 2;
+    padding: 0 15px;
+}
+
+#walletArea {
+    height: 28px;
+    width: 7em;
+    background-color: #cccccc80;
+    padding: 4px;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+#coinMap {
+    padding: 15px;
+    height: 91vh;
+    /* background-color: #ffc107; */
+    overflow-y: scroll;
+}
+
+#coinMap::-webkit-scrollbar {
+    display: none;
+}
+
+#coinBal {
+    height: 40vh;
+    width: 100%;
+    background-color: #030b1d;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#coindol {
+    height: 65px;
+    width: 100%;
+    /* background-color: #ffc107; */
+    font-size: 40px;
+    color: white;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    line-height: 6px;
+    padding-top: 20px;
+}
+
+#coindol small {
+    font-size: 12px;
+    font-weight: 400 !important;
+    color: #ffc107;
+}
+
+#wallSend {
+    margin-top: 5px;
+    height: 25vh;
+    width: 100%;
+    /* background-color: aliceblue; */
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#stake {
+    height: 65px;
+    width: 100px;
+    background-color: #030b1d;
+    text-align: center;
+    padding: 9px;
+    box-shadow: #ffc107 -3px 3px 9px -7px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#stake p {
+    font-size: 12px;
+    color: rgb(153, 151, 151);
+}
+
+#coingecko {
+    height: 60vh;
+    width: 100%;
+    background-color: #030b1d;
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+#coingecko::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+}
+
+#coingecko::-webkit-scrollbar-thumb{
+    background-color: #ffc107;
+    border-radius: 15px;
+}
+
+#crypto {
+    height: 50px;
+    width: 100%;
+    background-color: #030b1d;
+    padding: 10px;
+    top: 0;
+    z-index: 2;
+    position: sticky;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    border-bottom: 1px solid #ffc107;
+}
+
+#padd {
+    padding: 10px 10px 10px 0;
+}
+
+#borderline {
+    border-bottom: 0.1px solid rgba(78, 77, 77, 0.71);
+}
+
+#coinInfo {
+    height: 55px;
+    width: 80%;
+    /* background-color: rebeccapurple; */
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+#coinInfo img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+
+#eachCoin {
+    color: white;
+    font-size: 13px;
+    font-family: "Roboto", sans-serif;
+    /* line-height: 5px; */
+    /* margin-top: 5px; */
+}
+
+#eachCoin p {
+    font-size: 12px;
+}
+
+#nthCoin {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    text-align: right !important;
+}
+
+
+#nthCoin p {
+    font-size: 13px;
+
 }
 
 #load {
@@ -1081,8 +1380,15 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #sect4 {
+    height: 90vh;
     padding: 15px;
     position: relative;
+}
+
+#sect4.disabled {
+    background-color: rgb(0, 0, 0);
+    pointer-events: none !important;
+    opacity: 0.5;
 }
 
 #userdet {
@@ -1416,11 +1722,6 @@ input[type="number"]::-webkit-inner-spin-button {
     padding-top: 3em;
 }
 
-.pin-container img {
-    height: 100px;
-    width: 100px;
-}
-
 .pin-box {
     width: 40px;
     height: 40px;
@@ -1438,7 +1739,7 @@ input[type="number"]::-webkit-inner-spin-button {
     box-shadow: 0 0 5px rgba(255, 217, 0, 0.5);
 }
 
-.completes{
+.completes {
     font-size: 12px !important;
 }
 
@@ -1478,6 +1779,8 @@ input[type="number"]::-webkit-inner-spin-button {
         z-index: 3;
         padding: 0 10px 0 10px;
     }
+
+
 }
 
 @media (max-width : 400px) {
@@ -1510,11 +1813,28 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 @media (max-width : 430px) {
+    #actions {
+        height: 40vh;
+        width: 100%;
+        background-color: #030b1d;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
     #banktransfer {
         height: 115vh;
         width: 100%;
         background-color: white;
         /* border: 2px solid #ffc107; */
+    }
+
+    #tier {
+        height: 31vh;
+        width: 100%;
+        margin: 10px 0 10px 0;
+        border-radius: 10px;
+        background-color: #030b1d;
+        padding: 10px;
     }
 
     #personalInfo {

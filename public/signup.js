@@ -113,14 +113,14 @@ function createAcc(event) {
                         username: user.displayName,
                         dob: null,
                         country: "Nigeria",
-                        fullname : name,
+                        fullname: name,
                         profile: null,
                         account_num: acc_details,
                         transaction_pin: null,
                         email: user.email,
                         wallet: 5000,
                         transaction_history: [],
-                        time: new Date()
+                        time: new Date() // Store the current date and time
                     })
                         .then(() => {
                             // console.log("Signup Successful");
