@@ -82,7 +82,7 @@ let numericValue;
 // Hide the wrapper,banktransfer,dashboard initially
 wrapper.style.display = "none"
 banktransfer.style.display = "none"
-dashboards.style.display = "block"
+dashboards.style.display = "none"
 interbanktf.style.display = "none"
 amountpay.style.display = "none"
 floatingContainer.style.display = "none"
@@ -95,8 +95,7 @@ successImg.style.display = "block"
 errorFailed.style.display = "none"
 moneyReceipt.style.display = "none"
 notifications.style.display = "none"
-
-
+vitualCard.style.display = "block"
 
 
 infos.innerHTML = ""
