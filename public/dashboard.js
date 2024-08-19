@@ -13,7 +13,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-
+var storageRef = firebase.storage().ref();
+// var storage = firebase.storage();
 
 // Get HTML elements by ID
 let nav = document.getElementById("nav");
@@ -60,7 +61,15 @@ let nigeria = document.getElementById("nigeria");
 let payamt = document.getElementById("payamt");
 let userWallet = document.getElementById("userWallet");
 let coinInfo = document.getElementById('coinInfo');
-
+let TransMonie = document.getElementById('TransMonie');
+let displayHistory = document.getElementById('displayHistory');
+let inBal = document.getElementById('inBal');
+let outBal = document.getElementById('outBal');
+let transacSuccess = document.getElementById('transacSuccess');
+let amountSent = document.getElementById('amountSent');
+let errorFailed = document.getElementById('errorFailed');
+let moneyReceipt = document.getElementById('moneyReceipt');
+// let note ;
 
 let currentUser;
 let currentUserId;
@@ -71,15 +80,21 @@ let numericValue;
 // Hide the wrapper,banktransfer,dashboard initially
 wrapper.style.display = "none"
 banktransfer.style.display = "none"
-dashboards.style.display = "block"
+dashboards.style.display = "none"
 interbanktf.style.display = "none"
 amountpay.style.display = "none"
 floatingContainer.style.display = "none"
 paymentContainer.style.display = "none"
 editProfile.style.display = "none"
 tradeCoin.style.display = "none"
+displayHistory.style.display = "none"
+transacSuccess.style.display = "none"
+successImg.style.display = "block"
+errorFailed.style.display = "none"
+moneyReceipt.style.display = "block"
 
 infos.innerHTML = ""
+TransMonie.innerText = "Confirm"
 
 proceed.disabled = true;
 
@@ -88,10 +103,203 @@ function changeProfileImage() {
 }
 
 function loadFile(event) {
-    const image = document.getElementById('imageProfile');
-    image.src = URL.createObjectURL(event.target.files[0]);
-    console.log(image.src);
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            var uid = user.uid;
+
+            file = event.target.files[0];
+            const image = document.getElementById('imageProfile');
+            const storageRef = firebase.storage().ref();
+
+            // Validate the file type (e.g., only allow images)
+            const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!validFileTypes.includes(file.type)) {
+                alert("Invalid file type. Please select an image file.")
+                // console.error("Invalid file type. Please select an image file.");
+                return;
+            }
+
+            // Validate the file size (e.g., limit to 2MB)
+            const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
+            if (file.size > maxSizeInBytes) {
+                alert("File is too large. Please select a file smaller than 2MB.")
+                // console.error("File is too large. Please select a file smaller than 2MB.");
+                return;
+            }
+
+            // Display the selected image locally
+            image.src = URL.createObjectURL(file);
+            // console.log("Selected image preview:", image.src);
+
+            // Create a unique path for the image in Firebase Storage
+            const filePath = `profilePictures/${uid}/${file.name}`;
+            const fileRef = storageRef.child(filePath);
+
+            // Create the file metadata
+            const metadata = {
+                contentType: file.type
+            };
+
+            // Upload the file and metadata to Firebase Storage
+            const uploadTask = fileRef.put(file, metadata);
+
+            // Monitor the upload progress
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+                (snapshot) => {
+                    // Get task progress
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    // console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.PAUSED:
+                            // console.log('Upload is paused');
+                            break;
+                        case firebase.storage.TaskState.RUNNING:
+                            // console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    // Handle upload errors
+                    switch (error.code) {
+                        case 'storage/unauthorized':
+                            // console.error('User doesn\'t have permission to access the object');
+                            break;
+                        case 'storage/canceled':
+                            // console.error('User canceled the upload');
+                            break;
+                        case 'storage/unknown':
+                            // console.error('Unknown error occurred:', error.serverResponse);
+                            break;
+                    }
+                },
+                () => {
+                    // Upload completed successfully, get the download URL
+                    // Real-time listener
+                    const userDoc = db.collection("user").doc(uid);
+                    userDoc.onSnapshot((doc) => {
+                        if (doc.exists) {
+                            const data = doc.data();
+                            if (data.profile) {
+                                const image = document.getElementById('imageProfile');
+                                image.src = data.profile;
+                            }
+                        }
+                    });
+
+                    // After the image is uploaded
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        // console.log('File available at', downloadURL);
+
+                        // Update the user's photoURL in Firebase Authentication
+                        return user.updateProfile({
+                            photoURL: downloadURL,
+                        }).then(() => {
+                            // Update the profile picture URL in Firestore
+                            return userDoc.update({
+                                profile: downloadURL,
+                            });
+                        }).then(() => {
+                            // console.log("Profile updated successfully");
+                            alert("Profile updated successfully");
+
+                            // Update the image on the page without reloading
+                            const image = document.getElementById('imageProfile');
+                            image.src = downloadURL;
+                            const img = document.getElementById('img');
+                            img.src = downloadURL;
+                        }).catch((error) => {
+                            console.error("Error:", error);
+                        });
+                    });
+
+                }
+            );
+        } else {
+            // User is signed out
+        }
+    });
 }
+
+
+// To edit profile
+function editProfile1() {
+    let editName = document.getElementById("editName")
+    let editDob = document.getElementById("editDob")
+    let invalid = document.getElementById("invalid")
+    let greenbtn = document.getElementById("greenbtn")
+
+    if (editName.value == "" || editDob.value == "") {
+        invalid.innerHTML = `<p class="text-danger"">Provide the necessary details.</p>`
+        setTimeout(() => {
+            invalid.innerHTML = ""
+        }, 2000);
+        return;
+    } else {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                greenbtn.innerText = 'Updating...'
+                var uid = user.uid;
+                var docRef = db.collection("user").doc(uid);
+
+                // Create a new Date object from the input string
+                const date = new Date(editDob.value);
+                const options = {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                };
+                formattedCal = date.toLocaleDateString('en-US', options);
+                // console.log(formattedCal);
+
+                docRef.get().then((doc) => {
+                    if (doc.exists) {
+                        docRef.update({
+                            username: editName.value,
+                            dob: formattedCal,
+                        }).then(() => {
+                            // Update the UI with the new values
+                            let displayName = document.getElementById("displayName");
+                            let dob = document.getElementById("dob");
+
+                            if (displayName) {
+                                displayName.innerHTML = editName.value;
+                            }
+
+                            if (dob) {
+                                dob.innerHTML = formattedCal;
+                            }
+
+                            // Feedback to the user
+                            greenbtn.style.backgroundColor = "green"
+                            greenbtn.innerText = `Profile Updated`
+
+                            setTimeout(() => {
+                                greenbtn.style = "intial"
+                                greenbtn.innerHTML = "Update changes"
+
+                            }, 2500);
+
+                            editName.value = ""
+                            editDob.value = ""
+                            // console.log(doc.data());
+                        }).catch((error) => {
+                            console.error("Error updating Profile: ", error);
+                        });
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+            } else {
+                // User is signed out
+                // ...
+            }
+        });
+    }
+}
+
 
 
 // Array of image sources for the ad banner
@@ -105,14 +313,14 @@ if (coke) {
     // console.error("Element with id 'coke' not found.");
 }
 
+
 // Function to check the authentication state and fetch user data
 function check() {
-
     // Display a loader while fetching data
     dashboards.innerHTML = `
-        <div id="dash">
-            <div class="loader"></div>
-        </div>
+    <div id="dash">
+    <div class="loader"></div>
+    </div>
     `;
 
     // Check the user's authentication state
@@ -121,7 +329,7 @@ function check() {
             console.log(user);
             var uid = user.uid;
             var docRef = db.collection("user").doc(uid);
-
+            updatedWallet()
 
             docRef.get().then((doc) => {
                 currentUserId = doc.id
@@ -146,10 +354,10 @@ function check() {
                         <div class="d-flex justify-content-between align-items-center">
                             <div class= "d-flex align-items-center gap-2">
                                 <div id="avatar">
-                                    <img id="img" onclick="profile()" src="${doc.data().profile || './Images/avatar7.png'}" alt="">
+                                    <img id="img" onclick="profile(event)" src="${doc.data().profile || './Images/avatar7.png'}" alt="">
                                 </div>
                                 <div id="welcome">
-                                    <strong>Hi, <span> ${doc.data().username} </span></strong>
+                                    <strong>Hi, <span id="displayName"> ${doc.data().username} </span></strong>
                                     <p>Welcome let's make payments!</p>
                                 </div>
                             </div>
@@ -164,12 +372,12 @@ function check() {
                         <div id="balance">
                             <div class="d-flex justify-content-between align-items-center high">
                                 <div id="avail">
-                                    <p>Current Balance <span id="eye" onclick="hide()"><i class="fa-solid fa-eye"></i></span></p>
-                                    <input id="amount" value="&#8358; ${doc.data().wallet.toLocaleString()}" type="text" disabled>
+                                    <p>Current Balance <span id="eye"><i class="fa-solid fa-eye"></i></span></p>
+                                    <p id="amount"></p>
                                 </div>
                                 <div id="line"></div>
                                 <div id="monie">
-                                    <p>Transaction History <i class="fa-solid fa-caret-right"></i></p>
+                                    <p onclick="showHistory()">Transaction History <i class="fa-solid fa-chevron-right"></i></p>
                                     <button>Add Money <i class="fa-solid fa-plus"></i></button>
                                 </div>
                             </div>
@@ -316,7 +524,25 @@ function check() {
                         </div>
                     </div>
                     <div id="footer">
-                        
+                        <div id="navigate">
+                            <i class="fa-solid fa-house"></i>
+                            <p>Home</p>
+                        </div>
+                        <div id="navigate">
+                            <i class="fa-solid fa-credit-card"></i>
+                            <p>Cards</p>
+                        </div>
+                        <div id="navigates" onclick="profile(event)">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div id="navigate">
+                            <i class="fa-solid fa-sliders"></i>
+                            <p>Settings</p>
+                        </div>
+                        <div id="navigate">
+                            <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                            <p>Save</p>
+                        </div>
                     </div>
                     `
 
@@ -337,12 +563,10 @@ function check() {
                 }
             }).catch((error) => {
                 console.log("Error getting document:", error);
-                dashboards.innerHTML = `<p class="text-danger text-center mt-5">Error getting document:, ${error}</p>`;
-                // document.body.style.backgroundColor = "black"
-                // document.body.innerHTML = `<p class="text-danger">Error getting document:, ${error}</p>`;
+                dashboards.innerHTML = `<p class="text-danger text-center mt-5">Error getting document:, ${errorCode}</p>`;
+                return;
             });
         } else {
-            // User is signed out
             // If user is signed out, redirect to login page
             window.location.href = "login.html"
         }
@@ -353,17 +577,30 @@ function check() {
 check()
 
 
+function updatedWallet() {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            var uid = user.uid;
+            db.collection("user").doc(uid)
+                .onSnapshot((doc) => {
+                    // console.log("Current data Wallet: ", doc.data().wallet);
+                    let amount = document.getElementById("amount")
+                    amount.innerHTML = `&#8358; ${doc.data().wallet.toLocaleString()}`
+                });
+
+        } else {
+            // User is signed out
+        }
+    });
+}
+
+updatedWallet()
+
 // Function to display the profile edit message
-function profile() {
-    // message.innerHTML = "Edit Profile";
-    // wrapper.style.display = "block";
+function profile(event) {
+    event.preventDefault()
     editProfile.style.display = "block";
     dashboards.style.display = "none";
-
-    // Hide the wrapper after 5 seconds
-    // setTimeout(() => {
-    //     wrapper.style.display = "none";
-    // }, 3000);
 }
 
 // Function to display the notifications message
@@ -385,22 +622,6 @@ function pgs(event) {
         wrapper.style.display = "none"
     }, 3000);
     return event;
-}
-
-// Function to hide or show the amount field
-function hide() {
-    if (!amount || !eye) {
-        console.error("Elements with id 'amount' or 'eye' not found.");
-        return;
-    }
-
-    if (amount.type == 'password') {
-        amount.type = 'text';
-        eye.innerHTML = '<i class="fa-solid fa-eye"></i>';
-    } else {
-        amount.type = 'password';
-        eye.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-    }
 }
 
 function backtoboard() {
@@ -444,33 +665,48 @@ function banktf() {
         dashboards.style.display = "none";
         banktransfer.style.display = "block";
     } else {
-        console.error("Element with ID 'banktransfer' not found.");
+        // console.error("Element with ID 'banktransfer' not found.");
     }
 
     tobnktf.innerHTML = 'Transfer to Bank'
     noneit.style.display = "block"
     interbanktf.style.display = "none"
 
+    // firebase.auth().onAuthStateChanged((user) => {
+    //     if (user) {
+    //         var uid = user.uid;
+    //         var docRef = db.collection("user").doc(uid);
+
+    //         docRef.get().then((doc) => {
+    //             if (doc.exists) {
+    //                 namefull.innerHTML = doc.data().fullname
+    //                 accnum1.innerHTML = doc.data().account_num
+    //                 capital.innerHTML = `&#8358; ${doc.data().wallet.toLocaleString()}`
+    //             } else {
+    //                 // doc.data() will be undefined in this case
+    //                 console.log("No such document!");
+    //             }
+    //         }).catch((error) => {
+    //             // console.log("Error getting document:", error);
+    //         });
+    //     } else {
+    //         // User is signed out
+    //         // ...
+    //     }
+    // });
+
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             var uid = user.uid;
-            var docRef = db.collection("user").doc(uid);
-
-            docRef.get().then((doc) => {
-                if (doc.exists) {
+            db.collection("user").doc(uid)
+                .onSnapshot((doc) => {
                     namefull.innerHTML = doc.data().fullname
                     accnum1.innerHTML = doc.data().account_num
                     capital.innerHTML = `&#8358; ${doc.data().wallet.toLocaleString()}`
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
+                });
+
         } else {
             // User is signed out
-            // ...
         }
     });
 
@@ -501,7 +737,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let bank = allbanks[index];
                 // console.log(bank);
                 fetchbank.innerHTML += `
-                    <div id="banks" onclick="soons()">
+                    <div id="banks" onclick="soons(event)">
                         <img src="${bank.logo}" alt="Bank Logo">
                        <div id="lineheit">
                             <p>${bank.name}</p>
@@ -515,7 +751,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-function soons() {
+function soons(event) {
+    event.preventDefault()
     wrapper.style.display = "block";
     message.innerHTML = "Our next update will include this feature";
 
@@ -539,36 +776,51 @@ function interbank() {
         dashboards.style.display = "none";
         banktransfer.style.display = "block";
     } else {
-        console.error("Element with ID 'banktransfer' not found.");
+        // console.error("Element with ID 'banktransfer' not found.");
     }
 
     tobnktf.innerHTML = 'Transfer to SafeCoin'
     noneit.style.display = "none"
     interbanktf.style.display = "block"
 
+    // firebase.auth().onAuthStateChanged((user) => {
+    //     if (user) {
+    //         var uid = user.uid;
+    //         var docRef = db.collection("user").doc(uid);
+
+    //         docRef.get().then((doc) => {
+    //             if (doc.exists) {
+    //                 namefull.innerHTML = doc.data().fullname
+    //                 accnum1.innerHTML = doc.data().account_num
+    //                 capital.innerHTML = `${document.getElementById("amount").innerHTML}`
+    //                 return;
+    //             } else {
+    //                 // console.log("No such document!");
+    //                 return;
+    //             }
+    //         }).catch((error) => {
+    //             // console.log("Error getting document:", error);
+    //         });
+    //     } else {
+    //         // User is signed out
+
+    //         // ...
+    //     }
+    // });
+
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             var uid = user.uid;
-            var docRef = db.collection("user").doc(uid);
-
-            docRef.get().then((doc) => {
-                if (doc.exists) {
+            db.collection("user").doc(uid)
+                .onSnapshot((doc) => {
                     namefull.innerHTML = doc.data().fullname
                     accnum1.innerHTML = doc.data().account_num
-                    capital.innerHTML = `&#8358; ${doc.data().wallet.toLocaleString()}`
-                } else {
-                    console.log("No such document!");
-                }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
+                    capital.innerHTML = `${document.getElementById("amount").innerHTML}`
+                });
         } else {
             // User is signed out
-
-            // ...
         }
     });
-
 }
 
 function checkMaxLength(input, maxLength) {
@@ -628,7 +880,6 @@ proceed.addEventListener("click", function () {
                                 return;
                             } else {
                                 querySnapshot.forEach((doc) => {
-                                    // console.log(doc.id, " => ", doc.data());
                                     receiverId = doc.id;
                                     receiver = doc.data();
                                     innerthl.innerHTML = `
@@ -676,10 +927,10 @@ proceed.addEventListener("click", function () {
                                                 </div>
 
                                                 <div class="mt-2" id="narration">
-                                                    <input type="text" placeholder="Enter note (Optional)">
+                                                    <input type="text" id="notes" placeholder="Enter note (Optional)">
                                                 </div>
                                             </div>
-                                            <div class="autos"><button onclick="sendFunds()" class=" btn btn-warning mt-4 w-100 text-light h-50">Next</button></div>
+                                            <div class="autos"><button onclick="sendFunds()" class=" btn btn-warning mt-4 w-100 text-light h-50">Proceed</button></div>
                                         `
                                     }, 1000);
                                     return;
@@ -687,14 +938,14 @@ proceed.addEventListener("click", function () {
                             }
                         })
                         .catch((error) => {
-                            console.log("Error getting documents: ", error);
+                            // console.log("Error getting documents: ", error);
                         });
                 } else {
                     // doc.data() will be undefined in this case
-                    console.log("No such document!");
+                    // console.log("No such document!");
                 }
             }).catch((error) => {
-                console.log("Error getting document:", error);
+                // console.log("Error getting document:", error);
             });
 
         } else {
@@ -714,27 +965,14 @@ function inptamt() {
     let inputField = document.getElementById("amounts");
     let value = inputField.value;
 
-    // Save cursor position
     let cursorPosition = inputField.selectionStart;
-
-    // Remove all non-numeric characters except for the decimal point
     let cleanedValue = value.replace(/[^0-9.]/g, '');
-
-    // Split the value into integer and decimal parts
     let parts = cleanedValue.split('.');
     let integerPart = parts[0];
     let decimalPart = parts.length > 1 ? '.' + parts[1].substring(0, 2) : '';
-
-    // Add commas to the integer part
     let formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-    // Combine the integer and decimal parts
     let formattedValue = formattedIntegerPart + decimalPart;
-
-    // Update the input field value
     inputField.value = formattedValue;
-
-    // Restore cursor position
     let newCursorPosition = cursorPosition + (formattedValue.length - value.length);
     inputField.setSelectionRange(newCursorPosition, newCursorPosition);
 }
@@ -744,11 +982,8 @@ function validateInput(event) {
     if (!/[\d.]/.test(key) && key !== 'Backspace') {
         event.preventDefault();
     }
-
-    // Attach the validateInput function to the keydown event
     amounts.addEventListener('keydown', validateInput);
 }
-
 
 function sendFunds() {
     let amounts = document.getElementById("amounts").value;
@@ -759,7 +994,7 @@ function sendFunds() {
     let reciName = document.getElementById("reciName");
     let currBal = document.getElementById("currBal");
     let payamt = document.getElementById("payamt");
-
+    let receiptFund = document.getElementById("receiptFund");
 
     displayAmount.innerHTML = amounts
     paymont.innerHTML = amounts
@@ -767,9 +1002,11 @@ function sendFunds() {
     reciName.innerHTML = receiver.fullname
     currBal.innerHTML = currentUser.wallet.toLocaleString()
     payamt.innerHTML = amounts
+    amountSent.innerHTML = amounts
+    receiptFund.innerHTML = amounts
+
     // Remove commas for conversion
     numericValue = +(amounts.replace(/,/g, ''));
-    // console.log("Numeric value:", numericValue);
     if (amounts == "") {
         inifunds.innerHTML = `
         <div class="shake" id="users">
@@ -789,7 +1026,7 @@ function sendFunds() {
         amtsend.style.height = "12.5em"
         return;
     } else if (numericValue > currentUser.wallet) {
-        console.log("Insufficient funds");
+        // console.log("Insufficient funds");
         let inifunds = document.getElementById("inifunds");
         if (inifunds) {
             inifunds.innerHTML = `
@@ -804,14 +1041,16 @@ function sendFunds() {
     } else {
         sect4.classList.toggle("disabled")
         let inifunds = document.getElementById("inifunds");
+        amounts = ""
         inifunds.innerHTML = ""
         amtsend.style.height = "10.5em"
 
         let floatingContainer = document.getElementById("floatingContainer");
         floatingContainer.classList.remove("float-down");
         void floatingContainer.offsetWidth;
-        floatingContainer.style.display = 'block'; // Make sure the container is visible
+        floatingContainer.style.display = 'block';
         floatingContainer.classList.add("float-up");
+
     }
 
 }
@@ -851,7 +1090,7 @@ function confirm() {
     let paymentContainer = document.getElementById("paymentContainer");
     paymentContainer.classList.remove("float-down");
     void paymentContainer.offsetWidth;
-    paymentContainer.style.display = 'block'; // Make sure the container is visible
+    paymentContainer.style.display = 'block';
     paymentContainer.classList.add("float-up");
     setTimeout(() => {
         floatingContainer.style.display = "none"
@@ -869,9 +1108,9 @@ function closepaymentContainer() {
     }, { once: true });
 
     pinBoxes.forEach(input => {
-        input.value = ''; // Clear the value of each input field
+        input.value = '';
     });
-    pinBoxes[0].focus(); // Optionally focus the first input field after clearing
+    pinBoxes[0].focus();
     infos.innerHTML = ""
 }
 
@@ -901,6 +1140,7 @@ function handleBackspace(event) {
     }
 }
 
+
 async function sendFund() {
     let pinValue = "";
     pinBoxes.forEach(input => {
@@ -916,31 +1156,38 @@ async function sendFund() {
         infos.innerHTML = "Invalid pin, Try again";
         return;
     }
-
-    infos.innerHTML = "<p class='text-success'>Processing ...</p>";
-
+    infos.innerHTML = "";
+    TransMonie.innerText = "Processing ..."
     try {
-        // Get the current date and time
-        const timestamp = new Date();
+        // Get the current date and current time
+        let notes = document.getElementById("notes")
+        const currentDate = new Date();
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const formattedDate = currentDate.toLocaleDateString('en-US', options);
+        const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+        const formattedTime = currentDate.toLocaleTimeString('en-US', timeOptions);
+        let receiptdate = document.getElementsByClassName("receiptdate")
+        receiptdate.innerHTML = `${formattedDate}, ${formattedTime}`
 
         // Update current user's wallet
         await db.collection("user").doc(currentUserId).update({
             wallet: currentUser.wallet - numericValue
         });
-        // 
+
         // Update receiver's wallet
         await db.collection("user").doc(receiverId).update({
             wallet: receiver.wallet + numericValue
-        });
+        })
 
         // Update current user's transaction history
         await db.collection("user").doc(currentUserId).update({
             transaction_history: firebase.firestore.FieldValue.arrayUnion({
                 amount: numericValue,
-                message: `You transferred ${numericValue} to ${receiver.fullname}`,
+                message: `Transfer to ${receiver.fullname}`,
                 transaction_type: "Debit",
-                date: timestamp.toLocaleDateString(), // Store date
-                time: timestamp.toLocaleTimeString()  // Store time
+                date: formattedDate,
+                time: formattedTime,
+                // narration: notes.value
             })
         });
 
@@ -948,78 +1195,200 @@ async function sendFund() {
         await db.collection("user").doc(receiverId).update({
             transaction_history: firebase.firestore.FieldValue.arrayUnion({
                 amount: numericValue,
-                message: `You received ${numericValue} from ${currentUser.fullname}`,
+                message: `Transfer from ${currentUser.fullname}`,
                 transaction_type: "Credit",
-                date: timestamp.toLocaleDateString(),
-                time: timestamp.toLocaleTimeString()
+                date: formattedDate,
+                time: formattedTime,
+                // narration: 
             })
         });
 
         // alert("Transaction successful");
         infos.innerHTML = "<p class='text-success'>Transaction successful</p>";
+        TransMonie.innerText = "Confirm"
+        amountpay.style.display = "none"
+        errorFailed.style.display = "none"
+        successImg.style.display = "block"
+        transacSuccess.style.display = "block"
 
         // Clear PIN input fields
         pinBoxes.forEach(input => {
-            input.value = ''; // Clear the value of each input field
+            input.value = '';
         });
-
-        // Optionally focus the first input field after clearing
         pinBoxes[0].focus();
-
-        let amount = document.getElementById("amount");
-        amount.value = `${amount + numericValue}`;
-        // Optionally reload the page
-        window.location.reload();
         return;
 
     } catch (error) {
-        console.error("Error updating document: ", error);
+        // console.error("Error updating document: ", error);
         infos.innerHTML = "<p class='text-danger'>Transaction failed. Please try again later.</p>";
+        TransMonie.innerText = "Confirm"
+        amountpay.style.display = "none"
+        successImg.style.display = "none"
+        errorFailed.style.display = "block"
+        transacSuccess.style.display = "block"
         return;
     }
 }
 
 
 function BTCoin() {
-    const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
-    // Fetch data from the API
-    fetch(url)
-        .then(response => response.json())  // Parse the JSON from the response
-        .then(data => {
-            // Log the entire response
-            // console.log(data);
+    firebase.auth().onAuthStateChanged((user) => {
+        let coinPrice = document.getElementById("coinPrice");
+        if (user) {
+            var uid = user.uid;
+            db.collection("user").doc(uid)
+                .onSnapshot((doc) => {
+                    const nairaAmount = doc.data().wallet;
+                    const exchangeRate = 1600;
+                    const dollarAmount = nairaAmount / exchangeRate;
+                    coinPrice.innerHTML = dollarAmount.toFixed(2); // Format to 2 decimal places
 
-            // Map through the data to extract specific details
-            data.forEach(coin => {
-                // Display the information on the page
-              coinflex.innerHTML += `
-              <div id="borderline" class="d-flex justify-content-between">
-                    <div id="coinInfo">
-                        <img src="${coin.image}" alt="">
-                        <div id="eachCoin">
-                        <srtong>${coin.name} (${coin.symbol.toUpperCase()})</srtong>
-                        <p class="text-secondary">$${coin.current_price}  <span class="text-success">+${coin.high_24h.toFixed(2)}%</span> </p>
-                    </div>
-                </div>
-                
-                <div id="nthCoin" class="mt-2">
-                    <strong class="text-light">0</strong>
-                    <p class="text-secondary">$0.00</p>
-                </div>
-             </div>
-              `
-                ;
-            });
-        })
-        .catch(error => {
-            console.error("Error fetching data:", error);
-        });
+                    // console.log(dollarAmount);
+                    // console.log(+coinPrice.innerHTML);
+
+                    const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
+
+                    // Fetch data from the API
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            const coinFlex = document.getElementById("coinflex"); // Make sure this element exists
+                            coinFlex.innerHTML = ""; // Clear any existing content
+                            data.forEach(coin => {
+                                coinFlex.innerHTML += `
+                                    <div id="borderline" class="d-flex justify-content-between">
+                                        <div id="coinInfo">
+                                            <img src="${coin.image}" alt="${coin.name}">
+                                            <div id="eachCoin">
+                                                <strong>${coin.name} (${coin.symbol.toUpperCase()})</strong>
+                                                <p class="text-secondary">$${coin.current_price.toFixed(2)}  <span class="text-success">+${coin.high_24h.toFixed(2)}%</span></p>
+                                            </div>
+                                        </div>
+                                        <div id="nthCoin" class="mt-2">
+                                            <strong class="text-light">$ ${(coin.current_price * parseFloat(coinPrice.innerHTML)).toFixed(2)}</strong>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                        })
+                        .catch(error => {
+                            console.error("Error fetching data:", error);
+                        });
+                });
+        } else {
+            // Handle the case when the user is signed out
+            console.log("User is signed out.");
+        }
+    });
 }
 
 // Call the function to fetch and display the data
 BTCoin();
 
+function showHistory() {
+    displayHistory.style.display = "block"
+    dashboards.style.display = "none"
+}
 
+function transBack() {
+    dashboards.style.display = "block"
+    displayHistory.style.display = "none"
+}
+
+function inOut() {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            var uid = user.uid;
+            db.collection("user").doc(uid)
+                .onSnapshot((doc) => {
+                    let inBal = document.getElementById("inBal");
+                    let outBal = document.getElementById("outBal");
+                    let historyFetch = document.getElementById("historyFetch");
+                    // console.log("Current data: ", doc.data().transaction_history);
+                    let uidWallet = doc.data().transaction_history;
+                    let totalCredit = 0;
+                    let totalDebit = 0;
+                    
+
+                    if (uidWallet == "") {
+                        historyFetch.innerHTML = `
+                            <div id="nodata">
+                                <img src="./Images/No-history.png" alt="">
+                                <p class = "emptyHis mt-3">No History Yet</p>
+                            </div>
+                        `;
+                        return;
+                    } else {
+                        db.collection("uder").doc(uid)
+                            .onSnapshot((doc) => {
+                                // console.log("Current data: ", doc.data().transaction_history.Date);
+                                // Reverse the array to show the latest transactions first
+                                uidWallet.reverse()
+
+                                uidWallet.forEach((eachHistory, index) => {
+                                    let transactionIcon = eachHistory.transaction_type === "Credit" ? '<i class="fa-solid fa-arrow-down"></i>' : '<i class="fa-solid fa-arrow-up"></i>';
+                                    let transactionSign = eachHistory.transaction_type === "Credit" ? '+' : '-';
+                                    let color = eachHistory.transaction_type === "Credit" ? 'green' : 'red';
+
+                                    historyFetch.innerHTML += `
+                                        <div class="eachTrans">
+                                            <div id="historyIcon">
+                                                <p>${transactionIcon}</p>
+                                            </div>
+                                            <div class="d-flex w-100 justify-content-between">
+                                            <div id="tfto">
+                                                <p class="fss">${eachHistory.message}</p>
+                                                <p id="tfti" class="text-black-50">${eachHistory.date}, ${eachHistory.time}</p>
+                                            </div>
+                                            <div id="tftos">
+                                                <p class="fw-semibold" id="credeb-${index}" style="color: ${color};">
+                                                    ${transactionSign}₦${parseFloat(eachHistory.amount).toLocaleString()}
+                                                </p>
+                                                <div id="seccessTf">
+                                                    <p>Successful</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+
+                                    if (eachHistory.transaction_type === "Credit") {
+                                        totalCredit += parseFloat(eachHistory.amount);
+                                    } else if (eachHistory.transaction_type === "Debit") {
+                                        totalDebit += parseFloat(eachHistory.amount);
+                                    }
+                                });
+
+                                // Update the UI with the calculated totals
+                                inBal.innerHTML = totalCredit.toLocaleString();
+                                outBal.innerHTML = totalDebit.toLocaleString();
+                            });
+                    }
+                });
+        } else {
+            // User is signed out
+        }
+    });
+}
+
+
+inOut()
+
+function done() {
+    closeFloatingContainer()
+    closepaymentContainer()
+    transacSuccess.style.display = "none"
+    amountpay.style.display = "none"
+    dashboards.style.display = "block"
+}
+
+function failederr() {
+    closeFloatingContainer()
+    closepaymentContainer()
+    transacSuccess.style.display = "none"
+    amountpay.style.display = "none"
+    dashboards.style.display = "block"
+}
 
 function logOut() {
     firebase.auth().signOut().then(() => {
@@ -1028,6 +1397,6 @@ function logOut() {
     }).catch((error) => {
         // An error happened.
         alert("Couldn't log out")
-        console.log(error);
+        // console.log(error);
     });
 }

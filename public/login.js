@@ -11,6 +11,7 @@ const firebaseConfig = {
 // Initialize Firebase and Firestore
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 // Get references to DOM elements
 let hide = document.getElementById("hide")
@@ -86,7 +87,7 @@ function gainAccess(ev) {
                 var user = userCredential.user;
                 console.log(user);
                 // alert("Login Successful")
-                info.innerHTML = `<p class = "text-success"> Login Successfull</p>`
+                info.innerHTML = `<p class = "text-success"> Login Successful</p>`
                 signedEmail.value = "";
                 signedPassword.value = "";
                 LoginAcc.innerHTML = "Login"
@@ -98,15 +99,15 @@ function gainAccess(ev) {
                         docRef.get().then((doc) => {
                             if (doc.exists) {
                                 if (doc.data().transaction_pin == null) {
-                                    forms.style.display = "none"
                                     setpin.style.display = "block"
+                                    forms.style.display = "none"
                                     return;
                                 }
                             }
                             window.location.href = "dashboard.html"
 
                         }).catch((error) => {
-                            console.log("Error getting document:", error);
+                            // console.log("Error getting document:", error);
                         });
                     } else {
                         // User is signed out
@@ -117,8 +118,8 @@ function gainAccess(ev) {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                console.log(errorMessage);
-                info.innerHTML = `<p class = "text-danger">${errorMessage}</p>`
+                console.log(errorCode);
+                info.innerHTML = `<p class = "text-danger">${errorCode}</p>`
                 LoginAcc.innerHTML = "Login"
             });
     }
@@ -149,22 +150,15 @@ setInterval(() => {
 // Function to navigate to the dashboard after showing a welcome message
 function dashboard() {
     setTimeout(() => {
-        setpin.style.display = "none"
         welcomepage.style.display = "block"
+        setpin.style.display = "none"
     }, 2000);
     setTimeout(() => {
-        welcomepage.style.display = "none"
         window.location.href = "dashboard.html"
+        welcomepage.style.display = "none"
     }, 10000);
 }
 
-
-// // Function to move to the next input field in the PIN input sequence
-// function moveToNext(current, nextFieldID) {
-//     if (current.value.length === 1 && nextFieldID !== "") {
-//         document.getElementById(nextFieldID).focus();
-//     }
-// }
 
 
 // Function to move to the next input field in the PIN input sequence
@@ -252,7 +246,7 @@ function create() {
                             docRef.update({
                                 transaction_pin: pin
                             }).then(() => {
-                                console.log("Transaction PIN successfully set!");
+                                // console.log("Transaction PIN successfully set!");
                                 infos.innerHTML = '<p class="text-success">Transaction PIN successfully set!</p>'
                                 // console.log(doc.data());
                                 dashboard()
@@ -279,5 +273,45 @@ function create() {
             }
         });
 
+    }
+}
+
+
+function sendPasswordReset(email) {
+    info.innerHTML = `<p class="">Processing ...</p>`
+    auth.sendPasswordResetEmail(email)
+        .then(() => {
+            // This will always execute, regardless of whether the email is registered.
+            info.innerHTML = `<p class="text-success">If an account with that email exists, you will receive a password reset link. Please check your inbox.</p>`;
+            // alert('If an account with that email exists, you will receive a password reset link. Please check your inbox.');
+            setTimeout(() => {
+                info.innerHTML = ""
+            }, 3000);
+        })
+        .catch((error) => {
+            // Handle errors here
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            if (errorCode === 'auth/invalid-email') {
+                info.innerHTML = `<p class="text-danger">Invalid email address. Please enter a valid email.</p>`;
+                setTimeout(() => {
+                    info.innerHTML = ""
+                }, 3000);
+            } else {
+                alert(`Error: ${errorMessage}`);
+            }
+        });
+}
+
+function resetPassword() {
+    const email = signedEmail.value;
+    if (email) {
+        sendPasswordReset(email);
+    } else {
+        info.innerHTML = `<p class="text-danger">Please enter your email address.</p>`;
+        setTimeout(() => {
+            info.innerHTML = ""
+        }, 3000);
     }
 }

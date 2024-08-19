@@ -11,6 +11,10 @@ body {
     background-repeat: no-repeat; */
 }
 
+#wrapper {
+    z-index: 6 !important;
+}
+
 #wrapper #toast {
     background: #fff;
     padding: 20px 15px 20px 20px;
@@ -128,12 +132,14 @@ body {
     max-width: 448px;
     background-color: white !important;
     margin: auto;
+    box-sizing: border-box;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 #dashboard {
     height: 100vh;
     overflow-y: scroll;
+    box-sizing: border-box;
     width: 100%;
 }
 
@@ -166,6 +172,7 @@ body {
 
 #dash {
     height: 100vh;
+    box-sizing: border-box;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -175,6 +182,7 @@ body {
 
 #editProfile {
     height: 100vh;
+    box-sizing: border-box;
     width: 100%;
     background-color: white;
     display: none;
@@ -227,7 +235,6 @@ body {
     background-color: #ffc107;
     margin: -19px 0 0 5.8em;
     font-size: 13px;
-    border-radius: 2px solid white;
 }
 
 #middle {
@@ -249,7 +256,7 @@ body {
     padding: 10px;
 }
 
-#kyc{
+#kyc {
     height: 20px;
     width: 100%;
     margin-top: 6px;
@@ -261,7 +268,7 @@ body {
     padding-top: 13px;
 }
 
-#progress{
+#progress {
     height: 70px;
     width: 100%;
     /* background-color: red; */
@@ -270,18 +277,18 @@ body {
     position: relative;
 }
 
-.www{
+.www {
     width: 93%;
     margin: auto;
 }
 
-#proload1{
+#proload1 {
     height: 7px;
     width: 49%;
     background-color: rgba(227, 216, 216, 0.614);
 }
 
-#cheeck{
+#cheeck {
     color: #ffc107;
     position: absolute;
     background-color: #030b1d;
@@ -292,11 +299,11 @@ body {
     margin: -10px 0 0 0;
 }
 
-#cheeck p{
+#cheeck p {
     margin-top: -5px;
 }
 
-#lvl{
+#lvl {
     height: 30px;
     width: 50px;
     background-color: #ffc107;
@@ -310,7 +317,7 @@ body {
     border-radius: 7px;
 }
 
-#lvls{
+#lvls {
     height: 30px;
     width: 50px;
     background-color: transparent;
@@ -334,7 +341,7 @@ body {
     margin: -3.5em 0 0 15px;
 }
 
-#warnings{
+#warnings {
     height: 50px;
     width: 95%;
     background-color: #06173aef;
@@ -348,14 +355,14 @@ body {
     align-items: center;
 }
 
-#warnings p{
+#warnings p {
     width: 85%;
     font-size: 13px;
     color: white;
     height: 25px;
 }
 
-#pont{
+#pont {
     height: 40px;
     width: 30px;
     color: #ffc107;
@@ -391,6 +398,10 @@ body {
     padding: 11px;
     color: #ffc107;
     cursor: pointer;
+}
+
+.modal-body input {
+    margin-top: -9px;
 }
 
 #actions {
@@ -483,12 +494,11 @@ body {
 
 #tradeCoin {
     height: 100vh;
+    box-sizing: border-box;
     width: 100%;
     background-color: white;
     display: none;
 }
-
-
 
 .wallicons {
     font-size: 19px;
@@ -593,7 +603,7 @@ body {
     width: 5px;
 }
 
-#coingecko::-webkit-scrollbar-thumb{
+#coingecko::-webkit-scrollbar-thumb {
     background-color: #ffc107;
     border-radius: 15px;
 }
@@ -622,7 +632,7 @@ body {
 
 #coinInfo {
     height: 55px;
-    width: 80%;
+    width: 70%;
     /* background-color: rebeccapurple; */
     padding: 10px;
     display: flex;
@@ -763,14 +773,19 @@ body {
     height: 6em;
 }
 
+#monie p {
+    cursor: pointer;
+}
+
+#monie i {
+    font-size: 10px;
+}
+
 #avail i {
     padding: 0 0 0 6px;
 }
 
 #amount {
-    background: transparent;
-    border: none;
-    outline: none;
     font-size: 16px;
     color: white;
     width: 8em;
@@ -944,6 +959,7 @@ body {
 
 #banktransfer {
     height: 100vh;
+    box-sizing: border-box;
     width: 100%;
     background-color: white;
     /* border: 2px solid #ffc107; */
@@ -1360,6 +1376,7 @@ input[type="number"]::-webkit-inner-spin-button {
     position: relative;
     width: 100%;
     height: 100vh;
+    box-sizing: border-box;
     /* max-width: 500px; */
     background: #fff;
     overflow: hidden;
@@ -1766,6 +1783,313 @@ input[type="number"]::-webkit-inner-spin-button {
     display: none;
 }
 
+#navigate {
+    height: 50px;
+    width: 50px;
+    /* background-color: forestgreen; */
+    text-align: center;
+    cursor: pointer;
+    padding-top: 8px;
+}
+
+#navigate i {
+    color: #ffc107;
+    font-size: 15px;
+}
+
+#navigate p {
+    color: white;
+    font-size: 12px;
+}
+
+#navigates {
+    height: 60px;
+    width: 60px;
+    background-color: #ffc107;
+    border-radius: 50%;
+    padding: 3px;
+    text-align: center;
+    font-size: 30px;
+    margin: -15px 0 0 0;
+    cursor: pointer;
+}
+
+#displayHistory {
+    height: 100vh;
+    box-sizing: border-box;
+    width: 100%;
+    display: none;
+}
+
+#allHistory {
+    height: 10.5em;
+    width: 100%;
+    background-color: white;
+    top: 0;
+    position: sticky;
+    z-index: 2;
+}
+
+#cateGories {
+    margin-top: -12px;
+}
+
+#cont1,
+#cont3 {
+    cursor: pointer;
+}
+
+#cont2 {
+    margin-right: -30px;
+}
+
+#cont3 {
+    font-size: 13px !important;
+}
+
+#inOut {
+    height: 60px;
+    width: 95%;
+    background-color: white;
+    padding: 0 20px;
+    line-height: 12px;
+    margin: 0 10px;
+    border-bottom: 0.5px solid rgba(87, 85, 85, 0.578);
+}
+
+#in1 p span {
+    font-family: "Roboto", sans-serif;
+}
+
+#historyFetch {
+    height: 71vh;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+#historyFetch::-webkit-scrollbar {
+    display: none;
+}
+
+#nodata {
+    text-align: center;
+    margin: auto;
+}
+
+#nodata img {
+    height: 200px;
+    width: 200px;
+}
+
+.emptyHis {
+    color: black;
+    font-size: 20px;
+    text-align: center;
+}
+
+.eachTrans {
+    height: 70px;
+    width: 100%;
+    background-color: white;
+    padding: 4.5px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 0.1px solid lightgray;
+}
+
+#historyIcon {
+    height: 50px;
+    width: 55px;
+    background-color: rgba(7, 134, 7, 0.194);
+    border-radius: 50%;
+    color: green;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 6px;
+}
+
+#tfto {
+    line-height: 14px;
+    width: 90%;
+    /* background-color: blue; */
+    margin-top: 5px;
+    font-family: "Roboto", "San-serif";
+    height: 20px;
+    /* overflow-x: scroll; */
+}
+
+.fss {
+    font-size: 14px;
+}
+
+#tfti {
+    font-size: 13px;
+    /* background-color: red; */
+    margin-top: -0.2em !important;
+}
+
+#tftos {
+    margin-top: 5px;
+    font-family: "Roboto", "San-serif";
+    line-height: 9px;
+}
+
+#seccessTf {
+    height: 22px;
+    width: 80px;
+    padding: 4.5px;
+    background-color: rgba(7, 134, 7, 0.194);
+    color: green;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+}
+
+#transacSuccess {
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #030b1d;
+    padding: 15px;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    font-size: 'Roboto', 'san-serif';
+    display: none;
+}
+
+
+#successImg {
+    height: 60vh;
+    width: 100%;
+    text-align: center;
+    margin: 2em 0 0 0;
+    /* background-color: #ffc107; */
+    padding-top: 20px;
+}
+
+#successImg img {
+    height: 70px;
+    width: 70px;
+}
+
+#buttn {
+    margin-top: 6em;
+}
+
+#buttn button {
+    font-size: 13px;
+    color: white;
+    width: 150px;
+}
+
+#errorFailed {
+    height: 60vh;
+    width: 100%;
+    /* background-color: goldenrod; */
+    text-align: center;
+    margin: 5em 0 0 0;
+    padding-top: 20px;
+    display: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.middles {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+#errorFailed img {
+    height: 70px;
+    width: 70px;
+}
+
+#closefaild button {
+    margin-top: 5em;
+    background-color: red;
+    color: white;
+}
+
+#moneyReceipt {
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+#safeReceip {
+    height: 70vh;
+    width: 100%;
+    background-color: #030b1d;
+    border-radius: 5px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#navreceip {
+    height: 50px;
+    width: 100%;
+    /* background-color: red; */
+    padding: 0 10px;
+    color: #ffc107;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.mttd {
+    margin-top: 9px;
+    font-size: 14px;
+}
+
+#coinimgs {
+    height: 45px;
+    width: 140px;
+    border-radius: 25px;
+    background-color: #071a48f0;
+    border: 1.5px solid #ffc107;
+    padding: 2px 5px;
+}
+
+#coinimgs img {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+}
+
+#successDiv {
+    height: 110px;
+    width: 85%;
+    /* background-color: red; */
+    margin: auto;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    font-size: 23px;
+    line-height: 15px;
+    font-weight: 400;
+    font-family: 'Roboto', 'san-serif';
+    border-bottom: 1px solid rgb(79, 76, 76);
+}
+
+.emphasis{
+    font-size: 13px;
+    color: #ccc;
+    margin-top: -8px;
+}
+
+#tranactionDetails{
+    height: 15em;
+    width: 100%;
+    background-color: red;
+    padding: 10px;
+}
 
 @media (max-width : 1300px) {
     #footer {
@@ -1778,9 +2102,9 @@ input[type="number"]::-webkit-inner-spin-button {
         bottom: 0;
         z-index: 3;
         padding: 0 10px 0 10px;
+        display: flex;
+        justify-content: space-evenly;
     }
-
-
 }
 
 @media (max-width : 400px) {
@@ -1797,6 +2121,11 @@ input[type="number"]::-webkit-inner-spin-button {
         background-color: #030b1d;
         /* margin: 10px 0 0 0; */
         border-radius: 10px;
+    }
+
+    #tfti {
+        /* margin-top: -1.2em !important; */
+        font-size: 13px;
     }
 
     #footer {
@@ -1819,6 +2148,17 @@ input[type="number"]::-webkit-inner-spin-button {
         background-color: #030b1d;
         border-radius: 10px;
         padding: 15px;
+    }
+
+    #camera {
+        position: absolute;
+        color: black;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background-color: #ffc107;
+        margin: -19px 0 0 5.6em;
+        font-size: 13px;
     }
 
     #banktransfer {
@@ -1847,6 +2187,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
     #sectiontwo {
         height: 100vh;
+        box-sizing: border-box;
         width: 100%;
         padding: 0 15px 0 15px;
         /* background-color: red; */
@@ -1855,6 +2196,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
     #amountpay {
         height: 100vh;
+        box-sizing: border-box;
         width: 100%;
         background-color: white;
         z-index: 1;
@@ -1885,5 +2227,29 @@ input[type="number"]::-webkit-inner-spin-button {
         align-items: center;
         justify-content: space-between;
         /* margin-top: 50px; */
+    }
+}
+
+@media (max-width : 377px) {
+    .eachTrans {
+        height: 68px;
+        width: 100%;
+        background-color: white;
+        padding: 4.5px;
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width : 255px) {
+    .eachTrans {
+        height: fit-content !important;
+        width: 100%;
+        background-color: white;
+        padding: 4.5px;
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
     }
 }

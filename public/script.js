@@ -25,7 +25,7 @@ function getsignup() {
 }
 
 function download(event) {
-    alert("Coming Soon")
+  alert("Coming Soon")
 }
 
 
