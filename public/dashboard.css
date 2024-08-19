@@ -2019,12 +2019,15 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 100vh;
     width: 100%;
     box-sizing: border-box;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
+    background-image: url(./Images/geometric-intersection.png);
+    background-size: contain;
+    background-repeat: no-repeat;
     padding: 10px;
 }
 
 #safeReceip {
-    height: 70vh;
+    height: 72vh;
     width: 100%;
     background-color: #030b1d;
     border-radius: 5px;
@@ -2078,18 +2081,82 @@ input[type="number"]::-webkit-inner-spin-button {
     border-bottom: 1px solid rgb(79, 76, 76);
 }
 
-.emphasis{
+.emp {
     font-size: 13px;
     color: #ccc;
+    /* color: red !important; */
     margin-top: -8px;
+    z-index: 3;
 }
 
-#tranactionDetails{
+#tranactionDetails {
     height: 15em;
     width: 100%;
-    background-color: red;
+    /* background-color: red; */
+    padding: 10px;
+    color: white;
+    margin-top: 15px;
+}
+
+#tranactionDetails small {
+    color: #ccc;
+}
+
+#tranactionDetails p {
+    font-family: 'Roboto', 'san-serif';
+    /* width: 63%; */
+    font-size: 13px;
+    /* background-color: green; */
+}
+
+#printRecipt {
+    height: 6em;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #030b1d;
+    border-top: 2px dashed #ffc107;
     padding: 10px;
 }
+
+#btths button {
+    width: 45%;
+}
+
+#btths {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+
+/* Print Styles */
+@media print {
+    /* Ensure background images and colors are preserved */
+    #moneyReceipt {
+        background-color: #030b1d !important;
+        background-image: url('./Images/geometric-intersection.png') !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /* Adjust other styles as needed */
+    #safeReceip {
+        height: 90vh;
+        width: 100%;
+        background-color: #030b1d !important;
+        border-radius: 5px;
+        padding: 10px;
+        color: white;
+        font-family: 'Roboto', 'sans-serif';
+    }
+
+    /* Hide non-printable elements */
+    #printRecipt,
+    #printRecipt * {
+        display: none;
+    }
+}
+
 
 @media (max-width : 1300px) {
     #footer {
@@ -2203,6 +2270,14 @@ input[type="number"]::-webkit-inner-spin-button {
         /* border: 2px solid #ffc107; */
     }
 
+    #safeReceip {
+        height: 66vh;
+        width: 100%;
+        background-color: #030b1d;
+        border-radius: 5px;
+        margin-top: 30px;
+        padding: 10px;
+    }
 
     #footer {
         height: 4em;

@@ -80,7 +80,7 @@ let numericValue;
 // Hide the wrapper,banktransfer,dashboard initially
 wrapper.style.display = "none"
 banktransfer.style.display = "none"
-dashboards.style.display = "none"
+dashboards.style.display = "block"
 interbanktf.style.display = "none"
 amountpay.style.display = "none"
 floatingContainer.style.display = "none"
@@ -91,7 +91,7 @@ displayHistory.style.display = "none"
 transacSuccess.style.display = "none"
 successImg.style.display = "block"
 errorFailed.style.display = "none"
-moneyReceipt.style.display = "block"
+moneyReceipt.style.display = "none"
 
 infos.innerHTML = ""
 TransMonie.innerText = "Confirm"
@@ -303,7 +303,7 @@ function editProfile1() {
 
 
 // Array of image sources for the ad banner
-let gif = ['./Images/cocacola.gif', './Images/bank.gif', './Images/cocacola2.gif', './Images/fanta.gif', './Images/jumia.gif'];
+let gif = ['./Images/bloomberg.gif', './Images/bank.gif', './Images/cocacola2.gif', './Images/fanta.gif', './Images/jumia.gif'];
 let index = 0;
 
 // Check if the 'coke' element exists and set its source
@@ -338,6 +338,8 @@ function check() {
                     currentUser = doc.data()
 
                     //Edit profile to display user details
+                    let recpname = document.getElementById("recpname")
+                    let recpacc = document.getElementById("recpacc")
                     imageProfile.src = currentUser.profile || './Images/avatar7.png'
                     nameProfile.innerHTML = currentUser.fullname
                     full.innerHTML = currentUser.fullname
@@ -346,6 +348,8 @@ function check() {
                     dob.innerHTML = currentUser.dob || "Not Provided"
                     nigeria.innerHTML = currentUser.country
                     userWallet.innerHTML = currentUser.username
+                    recpname.innerHTML = currentUser.fullname
+                    recpacc.innerHTML = currentUser.account_num
 
 
                     // Display the user's dashboard with data from Firestore
@@ -554,6 +558,7 @@ function check() {
                     coke = document.getElementById("coke");
                     if (coke) {
                         coke.src = gif[index];
+                        
                     } else {
                         // console.error("Element with id 'coke' not found after setting dashboard content.");
                     }
@@ -1166,8 +1171,7 @@ async function sendFund() {
         const formattedDate = currentDate.toLocaleDateString('en-US', options);
         const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
         const formattedTime = currentDate.toLocaleTimeString('en-US', timeOptions);
-        let receiptdate = document.getElementsByClassName("receiptdate")
-        receiptdate.innerHTML = `${formattedDate}, ${formattedTime}`
+
 
         // Update current user's wallet
         await db.collection("user").doc(currentUserId).update({
@@ -1190,7 +1194,6 @@ async function sendFund() {
                 // narration: notes.value
             })
         });
-
         // Update receiver's transaction history
         await db.collection("user").doc(receiverId).update({
             transaction_history: firebase.firestore.FieldValue.arrayUnion({
@@ -1204,6 +1207,9 @@ async function sendFund() {
         });
 
         // alert("Transaction successful");
+        let receiptdates = document.getElementsByClassName("receiptdates")
+        receiptdates.innerHTML = `${formattedDate}, ${formattedTime}`
+        // console.log(receiptdates.innerHTML);
         infos.innerHTML = "<p class='text-success'>Transaction successful</p>";
         TransMonie.innerText = "Confirm"
         amountpay.style.display = "none"
@@ -1308,7 +1314,7 @@ function inOut() {
                     let uidWallet = doc.data().transaction_history;
                     let totalCredit = 0;
                     let totalDebit = 0;
-                    
+
 
                     if (uidWallet == "") {
                         historyFetch.innerHTML = `
@@ -1319,6 +1325,7 @@ function inOut() {
                         `;
                         return;
                     } else {
+                        historyFetch.innerHTML = ""
                         db.collection("uder").doc(uid)
                             .onSnapshot((doc) => {
                                 // console.log("Current data: ", doc.data().transaction_history.Date);
@@ -1373,6 +1380,31 @@ function inOut() {
 
 
 inOut()
+
+
+function viewReceipt() {
+    closeFloatingContainer()
+    closepaymentContainer()
+    transacSuccess.style.display = "none"
+    moneyReceipt.style.display = "block"
+    let transnum = document.getElementById("transnum")
+    for (let index = 1; index <= 15; index++) {
+        const randoms = Math.floor(Math.random() * 10);
+        transnum.innerHTML += randoms;
+    }
+}
+
+function closereceipt() {
+    closeFloatingContainer()
+    closepaymentContainer()
+    moneyReceipt.style.display = "none"
+    dashboards.style.display = "block"
+}
+
+
+function printReceipt() {
+    window.print()
+}
 
 function done() {
     closeFloatingContainer()
