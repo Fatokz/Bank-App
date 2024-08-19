@@ -180,6 +180,41 @@ body {
     margin: auto;
 }
 
+#notifications{
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    color: white;
+}
+
+#notinav{
+    height: 50px;
+    width: 100%;
+    padding: 1px 10px;
+}
+
+.wwws{
+    width: 60%;
+}
+
+#dText{
+    height: 185px;
+    width: 100%;
+    background-color: #030b1d;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#dText img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.allages{
+    width: 90%;
+}
+
 #editProfile {
     height: 100vh;
     box-sizing: border-box;
@@ -727,7 +762,7 @@ body {
     margin: 0 15px 0 0;
 }
 
-#notify {
+#notifys {
     border-radius: 50%;
     background-color: red;
     position: absolute;
@@ -739,7 +774,7 @@ body {
     font-size: 13px;
 }
 
-#notify p {
+#notifys p {
     margin: -5px 0 0 3.5px;
 }
 

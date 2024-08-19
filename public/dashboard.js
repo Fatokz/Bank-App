@@ -69,6 +69,8 @@ let transacSuccess = document.getElementById('transacSuccess');
 let amountSent = document.getElementById('amountSent');
 let errorFailed = document.getElementById('errorFailed');
 let moneyReceipt = document.getElementById('moneyReceipt');
+let notifications = document.getElementById('notifications');
+// let notifys = document.getElementById('notifys');
 // let note ;
 
 let currentUser;
@@ -92,6 +94,10 @@ transacSuccess.style.display = "none"
 successImg.style.display = "block"
 errorFailed.style.display = "none"
 moneyReceipt.style.display = "none"
+notifications.style.display = "none"
+
+
+
 
 infos.innerHTML = ""
 TransMonie.innerText = "Confirm"
@@ -365,9 +371,9 @@ function check() {
                                     <p>Welcome let's make payments!</p>
                                 </div>
                             </div>
-                            <div class="text-warning fs-4" id="ii">
+                            <div class="text-warning d-flex align-items-center fs-4" id="ii">
                                 <i class="fa-solid fa-headset"></i>
-                                <span onclick="note()" id="rela"><i class="fa-solid fa-bell"></i><span id="notify"><p>1</p></span></span>
+                                <div onclick="note()" id="rela"><i class="fa-solid fa-bell"></i><small id="notifys"><p>1</p></small></div>
                             </div>
                         </div>
                     </div>
@@ -600,6 +606,12 @@ function updatedWallet() {
 }
 
 updatedWallet()
+// let notifys = document.getElementById('notifys');
+// notifys.style.display = 'none';
+
+// notifys.innerHTML = ""
+// console.log(notifys); // Should not be null
+// notifys.style.display = 'block';
 
 // Function to display the profile edit message
 function profile(event) {
@@ -607,15 +619,18 @@ function profile(event) {
     editProfile.style.display = "block";
     dashboards.style.display = "none";
 }
+// notifys.style.display = "none"
 
 // Function to display the notifications message
 function note() {
-    message.innerHTML = "Notifications";
-    wrapper.style.display = "block";
+    // notifys.style.display = "none"
+    dashboards.style.display = "none"
+    notifications.style.display = "block"
+}
 
-    setTimeout(() => {
-        wrapper.style.display = "none";
-    }, 3000);
+function backtonotis() {
+    notifications.style.display = "none"
+    dashboards.style.display = "block"
 }
 
 // Function to display a "coming soon" message
@@ -1262,7 +1277,7 @@ function BTCoin() {
                             coinFlex.innerHTML = ""; // Clear any existing content
                             data.forEach(coin => {
                                 coinFlex.innerHTML += `
-                                    <div id="borderline" class="d-flex justify-content-between">
+                                    <div onclick="soons(event)" id="borderline" class="d-flex justify-content-between">
                                         <div id="coinInfo">
                                             <img src="${coin.image}" alt="${coin.name}">
                                             <div id="eachCoin">
