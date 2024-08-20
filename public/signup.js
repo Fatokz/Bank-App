@@ -273,7 +273,7 @@ async function createAcc(event) {
             })
             .catch((error) => {
                 // Handle errors
-                console.error('Error sending verification email:', error);
+                // console.error('Error sending verification email:', error);
                 alert('Failed to send verification email. Please try again later.');
             });
 

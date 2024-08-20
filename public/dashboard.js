@@ -213,7 +213,7 @@ function loadFile(event) {
                             const img = document.getElementById('img');
                             img.src = downloadURL;
                         }).catch((error) => {
-                            console.error("Error:", error);
+                            // console.error("Error:", error);
                         });
                     });
 
@@ -288,14 +288,14 @@ function editProfile1() {
                             editDob.value = ""
                             // console.log(doc.data());
                         }).catch((error) => {
-                            console.error("Error updating Profile: ", error);
+                            // console.error("Error updating Profile: ", error);
                         });
                     } else {
                         // doc.data() will be undefined in this case
-                        console.log("No such document!");
+                        // console.log("No such document!");
                     }
                 }).catch((error) => {
-                    console.log("Error getting document:", error);
+                    // console.log("Error getting document:", error);
                 });
             } else {
                 // User is signed out
@@ -331,7 +331,7 @@ function check() {
     // Check the user's authentication state
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            console.log(user);
+            // console.log(user);
             var uid = user.uid;
             var docRef = db.collection("user").doc(uid);
             updatedWallet()
@@ -339,7 +339,7 @@ function check() {
             docRef.get().then((doc) => {
                 currentUserId = doc.id
                 if (doc.exists) {
-                    console.log("Document data:", doc.data());
+                    // console.log("Document data:", doc.data());
                     currentUser = doc.data()
 
                     //Edit profile to display user details
@@ -563,16 +563,16 @@ function check() {
                     coke = document.getElementById("coke");
                     if (coke) {
                         coke.src = gif[index];
-                        
+
                     } else {
                         // console.error("Element with id 'coke' not found after setting dashboard content.");
                     }
                 } else {
-                    console.log("No such document!");
+                    // console.log("No such document!");
                     dashboards.innerHTML = '<p class="danger">No user data found.</p>';
                 }
             }).catch((error) => {
-                console.log("Error getting document:", error);
+                // console.log("Error getting document:", error);
                 dashboards.innerHTML = `<p class="text-danger text-center mt-5">Error getting document:, ${errorCode}</p>`;
                 return;
             });
@@ -743,6 +743,28 @@ function banktf() {
     });
 
 }
+
+// let inptus = document.getElementById("inptus")
+// let display = document.getElementById("display")
+
+// function searchBank(event) {
+//     console.log(event.target.value);
+    
+//     fetch(`https://nigerianbanks.xyz/`)
+//         .then(fetcher => fetcher.json())
+//         .then(data => {
+//             console.log(data)
+//             let serchterms = inptus.value
+//             let countrynames = data.filter(country => country.name.common.toLowerCase().startsWith(serchterms.toLowerCase()))
+//             // console.log(serchterms);
+//             console.log(countrynames);
+//             countrynames.forEach(element => {
+//                 fetchbank.innerHTML += element.name.common + "<br/> "
+//                 serchterms = " "
+//             });
+//         })
+
+// }
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -1227,15 +1249,16 @@ async function sendFund() {
         });
 
         // alert("Transaction successful");
-        let receiptdates = document.getElementsByClassName("receiptdates")
-        receiptdates.innerHTML = `${formattedDate}, ${formattedTime}`
-        // console.log(receiptdates.innerHTML);
         infos.innerHTML = "<p class='text-success'>Transaction successful</p>";
         TransMonie.innerText = "Confirm"
         amountpay.style.display = "none"
         errorFailed.style.display = "none"
         successImg.style.display = "block"
         transacSuccess.style.display = "block"
+        let receiptdates = document.getElementById("receiptdates")
+        receiptdates.innerHTML = `${formattedDate}, ${formattedTime}`
+        // console.log(receiptdates.innerHTML);
+
 
         // Clear PIN input fields
         pinBoxes.forEach(input => {
@@ -1303,7 +1326,7 @@ function BTCoin() {
                 });
         } else {
             // Handle the case when the user is signed out
-            console.log("User is signed out.");
+            // console.log("User is signed out.");
         }
     });
 }
@@ -1403,6 +1426,7 @@ inOut()
 
 
 function viewReceipt() {
+    sect4.classList.remove("disabled")
     closeFloatingContainer()
     closepaymentContainer()
     transacSuccess.style.display = "none"
@@ -1415,6 +1439,7 @@ function viewReceipt() {
 }
 
 function closereceipt() {
+    sect4.classList.remove("disabled")
     closeFloatingContainer()
     closepaymentContainer()
     moneyReceipt.style.display = "none"
@@ -1424,9 +1449,13 @@ function closereceipt() {
 
 function printReceipt() {
     window.print()
+    sect4.classList.remove("disabled")
+    closeFloatingContainer()
+    closepaymentContainer()
 }
 
 function done() {
+    sect4.classList.remove("disabled")
     closeFloatingContainer()
     closepaymentContainer()
     transacSuccess.style.display = "none"
@@ -1435,6 +1464,7 @@ function done() {
 }
 
 function failederr() {
+    sect4.classList.remove("disabled")
     closeFloatingContainer()
     closepaymentContainer()
     transacSuccess.style.display = "none"

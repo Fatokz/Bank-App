@@ -85,7 +85,7 @@ function gainAccess(ev) {
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                console.log(user);
+                // console.log(user);
                 // alert("Login Successful")
                 info.innerHTML = `<p class = "text-success"> Login Successful</p>`
                 signedEmail.value = "";
@@ -118,7 +118,7 @@ function gainAccess(ev) {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                console.log(errorCode);
+                // console.log(errorCode);
                 info.innerHTML = `<p class = "text-danger">${errorCode}</p>`
                 LoginAcc.innerHTML = "Login"
             });
@@ -251,24 +251,24 @@ function create() {
                                 // console.log(doc.data());
                                 dashboard()
                             }).catch((error) => {
-                                console.error("Error setting transaction PIN: ", error);
+                                // console.error("Error setting transaction PIN: ", error);
                                 infos.innerHTML = '<p class="text-danger">Error setting transaction PIN</p>'
                             });
                         }
 
                         pinset.innerHTML = "Create PIN";
                     } else {
-                        console.log("No such document!");
+                        // console.log("No such document!");
                         infos.innerHTML = '<p class="text-danger">No such document!</p>'
                         pinset.innerHTML = "Create PIN";
                     }
                 }).catch((error) => {
-                    console.log("Error getting document:", error);
+                    // console.log("Error getting document:", error);
                     infos.innerHTML = '<p class="text-danger">Error getting document</p>'
                     pinset.innerHTML = "Create PIN";
                 });
             } else {
-                console.log("User is signed out");
+                // console.log("User is signed out");
                 pinset.innerHTML = "Create PIN";
             }
         });

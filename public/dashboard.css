@@ -927,6 +927,7 @@ body {
     margin: 10px 0 0 0;
     color: #030b1d;
     font-weight: 500;
+    text-shadow: 1px 2px  #ffc107;
 }
 
 #advert {
@@ -949,6 +950,7 @@ body {
 .serve {
     margin: 10px 0 0 0;
     font-weight: 500;
+    text-shadow: 1px 2px  #ffc107;
 }
 
 #services {
@@ -2116,11 +2118,11 @@ input[type="number"]::-webkit-inner-spin-button {
     border-bottom: 1px solid rgb(79, 76, 76);
 }
 
-.emp {
-    font-size: 13px;
+#receiptdates {
+    font-size: 10px;
     color: #ccc;
     /* color: red !important; */
-    margin-top: -8px;
+    margin-top: -7px;
     z-index: 3;
 }
 
@@ -2307,9 +2309,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /* Print Styles */
-@media print {
-
-    /* Ensure background images and colors are preserved */
+/* @media print {
     #moneyReceipt {
         background-color: #030b1d !important;
         background-image: url('./Images/geometric-intersection.png') !important;
@@ -2317,7 +2317,7 @@ input[type="number"]::-webkit-inner-spin-button {
         background-repeat: no-repeat !important;
     }
 
-    /* Adjust other styles as needed */
+
     #safeReceip {
         height: 50vh !important;
         width: 100%;
@@ -2328,12 +2328,11 @@ input[type="number"]::-webkit-inner-spin-button {
         font-family: 'Roboto', 'sans-serif';
     }
 
-    /* Hide non-printable elements */
     #printRecipt,
     #printRecipt * {
         display: none;
     }
-}
+} */
 
 @media (max-width : 1300px) {
     #footer {
