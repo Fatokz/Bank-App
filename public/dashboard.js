@@ -1244,13 +1244,12 @@ async function sendFund() {
         });
 
         // alert("Transaction successful");
-        setTimeout(() => {
-            closepaymentContainer()
-        }, 100);
         // infos.innerHTML = "<p class='text-success'>Transaction successful</p>";
         TransMonie.innerText = "Confirm"
         amountpay.style.display = "none"
         errorFailed.style.display = "none"
+        sect4.classList.remove("disabled")
+        paymentContainer.style.display = "none"
         successImg.style.display = "block"
         transacSuccess.style.display = "block"
         let receiptdates = document.getElementById("receiptdates")
@@ -1274,6 +1273,8 @@ async function sendFund() {
         TransMonie.innerText = "Confirm"
         amountpay.style.display = "none"
         successImg.style.display = "none"
+        sect4.classList.remove("disabled")
+        paymentContainer.style.display = "none"
         errorFailed.style.display = "block"
         transacSuccess.style.display = "block"
         return;
