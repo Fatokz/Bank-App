@@ -82,7 +82,7 @@ let numericValue;
 // Hide the wrapper,banktransfer,dashboard initially
 wrapper.style.display = "none"
 banktransfer.style.display = "none"
-dashboards.style.display = "none"
+dashboards.style.display = "block"
 interbanktf.style.display = "none"
 amountpay.style.display = "none"
 floatingContainer.style.display = "none"
@@ -95,7 +95,7 @@ successImg.style.display = "block"
 errorFailed.style.display = "none"
 moneyReceipt.style.display = "none"
 notifications.style.display = "none"
-vitualCard.style.display = "block"
+vitualCard.style.display = "none"
 
 
 infos.innerHTML = ""
@@ -537,7 +537,7 @@ function check() {
                             <i class="fa-solid fa-house"></i>
                             <p>Home</p>
                         </div>
-                        <div id="navigate">
+                        <div id="navigate" onclick="toVirtual()">
                             <i class="fa-solid fa-credit-card"></i>
                             <p>Cards</p>
                         </div>
@@ -605,14 +605,20 @@ function updatedWallet() {
 }
 
 updatedWallet()
-// let notifys = document.getElementById('notifys');
-// notifys.style.display = 'none';
 
-// notifys.innerHTML = ""
-// console.log(notifys); // Should not be null
-// notifys.style.display = 'block';
+// Function to display the profile virtual card
+function toVirtual() {
+    dashboards.style.display = "none";
+    vitualCard.style.display = "block";
+}
 
-// Function to display the profile edit message
+// Function to close the profile virtual card
+function backCardV() {
+    vitualCard.style.display = "none";
+    dashboards.style.display = "block";
+}
+
+// Function to display the profile edit
 function profile(event) {
     event.preventDefault()
     editProfile.style.display = "block";
