@@ -381,7 +381,7 @@ function check() {
                         <div id="balance">
                             <div class="d-flex justify-content-between align-items-center high">
                                 <div id="avail">
-                                    <p>Current Balance <span id="eye"><i class="fa-solid fa-eye"></i></span></p>
+                                    <p>Current Balance <span onclick="closeEye()"><i id="eye" class="fa-solid fa-eye"></i></span></p>
                                     <p id="amount"></p>
                                 </div>
                                 <div id="line"></div>
@@ -587,6 +587,24 @@ function check() {
 check()
 
 
+function closeEye() {
+    let eye = document.getElementById("eye");
+    let amount = document.getElementById("amount");
+
+    // Toggle the icon class
+    const isEyeVisible = eye.classList.toggle('fa-eye');
+    eye.classList.toggle('fa-eye-slash');
+
+    // Update the amount based on the visibility of the eye
+    if (isEyeVisible) {
+        amount.innerHTML = "****";
+    } else {
+        amount.innerHTML = updatedWallet();
+    }
+}
+
+
+
 function updatedWallet() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -749,7 +767,7 @@ function banktf() {
 
 // function searchBank(event) {
 //     console.log(event.target.value);
-    
+
 //     fetch(`https://nigerianbanks.xyz/`)
 //         .then(fetcher => fetcher.json())
 //         .then(data => {
@@ -1426,10 +1444,12 @@ inOut()
 
 
 function viewReceipt() {
-    sect4.classList.remove("disabled")
-    closeFloatingContainer()
-    closepaymentContainer()
     transacSuccess.style.display = "none"
+    setTimeout(() => {
+        sect4.classList.remove("disabled")
+        closeFloatingContainer()
+        closepaymentContainer()
+    }, 1000);
     moneyReceipt.style.display = "block"
     let transnum = document.getElementById("transnum")
     for (let index = 1; index <= 15; index++) {
@@ -1439,36 +1459,44 @@ function viewReceipt() {
 }
 
 function closereceipt() {
-    sect4.classList.remove("disabled")
-    closeFloatingContainer()
-    closepaymentContainer()
     moneyReceipt.style.display = "none"
+    setTimeout(() => {
+        sect4.classList.remove("disabled")
+        closeFloatingContainer()
+        closepaymentContainer()
+    }, 1000);
     dashboards.style.display = "block"
 }
 
 
 function printReceipt() {
     window.print()
-    sect4.classList.remove("disabled")
-    closeFloatingContainer()
-    closepaymentContainer()
+    setTimeout(() => {
+        sect4.classList.remove("disabled")
+        closeFloatingContainer()
+        closepaymentContainer()
+    }, 1000);
 }
 
 function done() {
-    sect4.classList.remove("disabled")
-    closeFloatingContainer()
-    closepaymentContainer()
     transacSuccess.style.display = "none"
     amountpay.style.display = "none"
+    setTimeout(() => {
+        sect4.classList.remove("disabled")
+        closeFloatingContainer()
+        closepaymentContainer()
+    }, 1000);
     dashboards.style.display = "block"
 }
 
 function failederr() {
-    sect4.classList.remove("disabled")
-    closeFloatingContainer()
-    closepaymentContainer()
     transacSuccess.style.display = "none"
     amountpay.style.display = "none"
+    setTimeout(() => {
+        sect4.classList.remove("disabled")
+        closeFloatingContainer()
+        closepaymentContainer()
+    }, 1000);
     dashboards.style.display = "block"
 }
 

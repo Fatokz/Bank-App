@@ -187,6 +187,10 @@ body {
     color: white;
 }
 
+#notifications{
+    display: none;
+}
+
 #notinav {
     height: 50px;
     width: 100%;
@@ -1995,9 +1999,11 @@ input[type="number"]::-webkit-inner-spin-button {
     font-weight: 600;
     font-size: 20px;
     font-size: 'Roboto', 'san-serif';
-    display: none;
 }
 
+#transacSuccess{
+    display: none;
+}
 
 #successImg {
     height: 60vh;
@@ -2061,6 +2067,10 @@ input[type="number"]::-webkit-inner-spin-button {
     background-size: contain;
     background-repeat: no-repeat;
     padding: 10px;
+}
+
+#moneyReceipt{
+    display: none;
 }
 
 #safeReceip {
@@ -2172,6 +2182,10 @@ input[type="number"]::-webkit-inner-spin-button {
     background-color: #ffc107;
 }
 
+#vitualCard{
+    display: none;
+}
+
 #cardNav {
     height: 50px;
     width: 100%;
@@ -2235,8 +2249,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #verve img {
-    height: 25px;
-    width: 100px;
+    height: 20px;
+    width: 65px;
 }
 
 #chip {
