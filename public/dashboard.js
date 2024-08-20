@@ -1244,7 +1244,10 @@ async function sendFund() {
         });
 
         // alert("Transaction successful");
-        infos.innerHTML = "<p class='text-success'>Transaction successful</p>";
+        setTimeout(() => {
+            closepaymentContainer()
+        }, 100);
+        // infos.innerHTML = "<p class='text-success'>Transaction successful</p>";
         TransMonie.innerText = "Confirm"
         amountpay.style.display = "none"
         errorFailed.style.display = "none"
@@ -1264,7 +1267,10 @@ async function sendFund() {
 
     } catch (error) {
         // console.error("Error updating document: ", error);
-        infos.innerHTML = "<p class='text-danger'>Transaction failed. Please try again later.</p>";
+        // infos.innerHTML = "<p class='text-danger'>Transaction failed. Please try again later.</p>";
+        setTimeout(() => {
+            closepaymentContainer()
+        }, 100);
         TransMonie.innerText = "Confirm"
         amountpay.style.display = "none"
         successImg.style.display = "none"
@@ -1422,11 +1428,6 @@ inOut()
 
 function viewReceipt() {
     transacSuccess.style.display = "none"
-    setTimeout(() => {
-        sect4.classList.remove("disabled")
-        closeFloatingContainer()
-        closepaymentContainer()
-    }, 1000);
     moneyReceipt.style.display = "block"
     let transnum = document.getElementById("transnum")
     for (let index = 1; index <= 15; index++) {
@@ -1436,42 +1437,22 @@ function viewReceipt() {
 }
 
 function closereceipt() {
-    setTimeout(() => {
-        sect4.classList.remove("disabled")
-        closeFloatingContainer()
-        closepaymentContainer()
-    }, 1000);
     moneyReceipt.style.display = "none"
     dashboards.style.display = "block"
 }
 
 
 function printReceipt() {
-    setTimeout(() => {
-        sect4.classList.remove("disabled")
-        closeFloatingContainer()
-        closepaymentContainer()
-    }, 1000);
     window.print()
 }
 
 function done() {
-    setTimeout(() => {
-        sect4.classList.remove("disabled")
-        closeFloatingContainer()
-        closepaymentContainer()
-    }, 1000);
     transacSuccess.style.display = "none"
     amountpay.style.display = "none"
     dashboards.style.display = "block"
 }
 
 function failederr() {
-    setTimeout(() => {
-        sect4.classList.remove("disabled")
-        closeFloatingContainer()
-        closepaymentContainer()
-    }, 1000);
     transacSuccess.style.display = "none"
     amountpay.style.display = "none"
     dashboards.style.display = "block"
