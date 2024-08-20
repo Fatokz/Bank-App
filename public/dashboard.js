@@ -70,7 +70,7 @@ let amountSent = document.getElementById('amountSent');
 let errorFailed = document.getElementById('errorFailed');
 let moneyReceipt = document.getElementById('moneyReceipt');
 let notifications = document.getElementById('notifications');
-// let notifys = document.getElementById('notifys');
+let resetPins = document.getElementById('resetPins');
 // let note ;
 
 let currentUser;
@@ -96,6 +96,7 @@ errorFailed.style.display = "none"
 moneyReceipt.style.display = "none"
 notifications.style.display = "none"
 vitualCard.style.display = "none"
+resetPins.style.display = "none"
 
 
 infos.innerHTML = ""
@@ -586,7 +587,6 @@ function check() {
 // Call the check function to initialize the dashboard
 check()
 
-
 function closeEye() {
     let eye = document.getElementById("eye");
     let amount = document.getElementById("amount");
@@ -602,7 +602,6 @@ function closeEye() {
         amount.innerHTML = updatedWallet();
     }
 }
-
 
 
 function updatedWallet() {
@@ -715,28 +714,6 @@ function banktf() {
     noneit.style.display = "block"
     interbanktf.style.display = "none"
 
-    // firebase.auth().onAuthStateChanged((user) => {
-    //     if (user) {
-    //         var uid = user.uid;
-    //         var docRef = db.collection("user").doc(uid);
-
-    //         docRef.get().then((doc) => {
-    //             if (doc.exists) {
-    //                 namefull.innerHTML = doc.data().fullname
-    //                 accnum1.innerHTML = doc.data().account_num
-    //                 capital.innerHTML = `&#8358; ${doc.data().wallet.toLocaleString()}`
-    //             } else {
-    //                 // doc.data() will be undefined in this case
-    //                 console.log("No such document!");
-    //             }
-    //         }).catch((error) => {
-    //             // console.log("Error getting document:", error);
-    //         });
-    //     } else {
-    //         // User is signed out
-    //         // ...
-    //     }
-    // });
 
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -762,58 +739,81 @@ function banktf() {
 
 }
 
-// let inptus = document.getElementById("inptus")
-// let display = document.getElementById("display")
-
-// function searchBank(event) {
-//     console.log(event.target.value);
-
-//     fetch(`https://nigerianbanks.xyz/`)
-//         .then(fetcher => fetcher.json())
-//         .then(data => {
-//             console.log(data)
-//             let serchterms = inptus.value
-//             let countrynames = data.filter(country => country.name.common.toLowerCase().startsWith(serchterms.toLowerCase()))
-//             // console.log(serchterms);
-//             console.log(countrynames);
-//             countrynames.forEach(element => {
-//                 fetchbank.innerHTML += element.name.common + "<br/> "
-//                 serchterms = " "
-//             });
-//         })
-
-// }
-
 
 document.addEventListener('DOMContentLoaded', function () {
-    let obj = [];
-    fetch("https://nigerianbanks.xyz/")
-        .then(result => result.json())
-        .then(data => {
-            // console.log(data);
-            obj.push(data);
-            let allbanks = obj[0];
-            // console.log(allbanks);
+    let inputs = document.getElementById("inptus");
+    let fetchbank = document.getElementById("fetchbank");
+    let loader = document.getElementById("loader");
 
-            // Clear the container before adding new elements
-            fetchbank.innerHTML = '';
+    function searchBank(event) {
+        // Show the loader
+        loader.style.display = 'block';
+        fetchbank.innerHTML = ''; // Clear previous search results
 
-            for (let index = 0; index < allbanks.length; index++) {
-                let bank = allbanks[index];
-                // console.log(bank);
-                fetchbank.innerHTML += `
-                    <div id="banks" onclick="soons(event)">
-                        <img src="${bank.logo}" alt="Bank Logo">
-                       <div id="lineheit">
-                            <p>${bank.name}</p>
-                            <small>${bank.ussd}</small>
+        fetch("https://nigerianbanks.xyz/")
+            .then(response => response.json())
+            .then(data => {
+                let serchterms = inputs.value;
+                let banknames = data.filter(banks => 
+                    banks.name.toLowerCase().startsWith(serchterms.toLowerCase())
+                );
+
+                // Clear previous search results
+                fetchbank.innerHTML = '';
+
+                if (banknames.length === 0) {
+                    fetchbank.innerHTML = "<p class='text-light w-100 text-center'>Not Available</p>";
+                } else {
+                    banknames.forEach(element => {
+                        fetchbank.innerHTML += `
+                        <div id="banks" onclick="soons(event)">
+                            <img src="${element.logo}" alt="Bank Logo">
+                            <div id="lineheit">
+                                <p>${element.name}</p>
+                                <small>${element.ussd}</small>
+                            </div>
                         </div>
-                    </div>
-                `;
-            }
-        });
+                    `;
+                    });
+                }
+                
+                // Hide the loader
+                loader.style.display = 'none';
+            });
+    }
 
+    // Add event listener to the input field
+    inputs.addEventListener('input', searchBank);
+
+    // Show initial banks and hide loader
+    function loadInitialBanks() {
+        loader.style.display = 'block';
+        fetch("https://nigerianbanks.xyz/")
+            .then(result => result.json())
+            .then(data => {
+                fetchbank.innerHTML = ''; // Clear previous content
+
+                data.forEach(bank => {
+                    fetchbank.innerHTML += `
+                        <div id="banks" onclick="soons(event)">
+                            <img src="${bank.logo}" alt="Bank Logo">
+                            <div id="lineheit">
+                                <p>${bank.name}</p>
+                                <small>${bank.ussd}</small>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Hide the loader
+                loader.style.display = 'none';
+            });
+    }
+
+    // Load initial banks on page load
+    loadInitialBanks();
 });
+
 
 
 function soons(event) {

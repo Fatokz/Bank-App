@@ -882,7 +882,7 @@ body {
 
 #copy button {
     font-size: 15px;
-    width: 5em;
+    width: 7em;
     border: 1.5px solid black;
     background-color: #ffc107;
     border-radius: 20px;
@@ -2320,7 +2320,19 @@ input[type="number"]::-webkit-inner-spin-button {
     border: dashed 2px #ffc107;
     border-radius: 10px;
     background-color: #030b1d !important;
+    padding: 5px;
 }
+
+#resetPins{
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+}
+
+/* #resetPins{
+    display: none;
+} */
 
 /* Print Styles */
 /* @media print {
