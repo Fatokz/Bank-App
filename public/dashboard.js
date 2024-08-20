@@ -344,8 +344,7 @@ function check() {
                     currentUser = doc.data()
 
                     //Edit profile to display user details
-                    let recpname = document.getElementById("recpname")
-                    let recpacc = document.getElementById("recpacc")
+
                     imageProfile.src = currentUser.profile || './Images/avatar7.png'
                     nameProfile.innerHTML = currentUser.fullname
                     full.innerHTML = currentUser.fullname
@@ -353,9 +352,7 @@ function check() {
                     semiNum.innerHTML = currentUser.account_num
                     dob.innerHTML = currentUser.dob || "Not Provided"
                     nigeria.innerHTML = currentUser.country
-                    userWallet.innerHTML = currentUser.username
-                    recpname.innerHTML = currentUser.fullname
-                    recpacc.innerHTML = currentUser.account_num
+
 
 
                     // Display the user's dashboard with data from Firestore
@@ -754,7 +751,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 let serchterms = inputs.value;
-                let banknames = data.filter(banks => 
+                let banknames = data.filter(banks =>
                     banks.name.toLowerCase().startsWith(serchterms.toLowerCase())
                 );
 
@@ -776,7 +773,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     `;
                     });
                 }
-                
+
                 // Hide the loader
                 loader.style.display = 'none';
             });
@@ -848,30 +845,6 @@ function interbank() {
     noneit.style.display = "none"
     interbanktf.style.display = "block"
 
-    // firebase.auth().onAuthStateChanged((user) => {
-    //     if (user) {
-    //         var uid = user.uid;
-    //         var docRef = db.collection("user").doc(uid);
-
-    //         docRef.get().then((doc) => {
-    //             if (doc.exists) {
-    //                 namefull.innerHTML = doc.data().fullname
-    //                 accnum1.innerHTML = doc.data().account_num
-    //                 capital.innerHTML = `${document.getElementById("amount").innerHTML}`
-    //                 return;
-    //             } else {
-    //                 // console.log("No such document!");
-    //                 return;
-    //             }
-    //         }).catch((error) => {
-    //             // console.log("Error getting document:", error);
-    //         });
-    //     } else {
-    //         // User is signed out
-
-    //         // ...
-    //     }
-    // });
 
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -1060,7 +1033,8 @@ function sendFunds() {
     let currBal = document.getElementById("currBal");
     let payamt = document.getElementById("payamt");
     let receiptFund = document.getElementById("receiptFund");
-
+    let recpname = document.getElementById("recpname")
+    let recpacc = document.getElementById("recpacc")
     displayAmount.innerHTML = amounts
     paymont.innerHTML = amounts
     accNum3.innerHTML = receiver.account_num
@@ -1069,6 +1043,9 @@ function sendFunds() {
     payamt.innerHTML = amounts
     amountSent.innerHTML = amounts
     receiptFund.innerHTML = amounts
+    userWallet.innerHTML = receiver.username
+    recpname.innerHTML = receiver.fullname
+    recpacc.innerHTML = receiver.account_num
 
     // Remove commas for conversion
     numericValue = +(amounts.replace(/,/g, ''));
@@ -1459,44 +1436,44 @@ function viewReceipt() {
 }
 
 function closereceipt() {
-    moneyReceipt.style.display = "none"
     setTimeout(() => {
         sect4.classList.remove("disabled")
         closeFloatingContainer()
         closepaymentContainer()
     }, 1000);
+    moneyReceipt.style.display = "none"
     dashboards.style.display = "block"
 }
 
 
 function printReceipt() {
-    window.print()
     setTimeout(() => {
         sect4.classList.remove("disabled")
         closeFloatingContainer()
         closepaymentContainer()
     }, 1000);
+    window.print()
 }
 
 function done() {
-    transacSuccess.style.display = "none"
-    amountpay.style.display = "none"
     setTimeout(() => {
         sect4.classList.remove("disabled")
         closeFloatingContainer()
         closepaymentContainer()
     }, 1000);
+    transacSuccess.style.display = "none"
+    amountpay.style.display = "none"
     dashboards.style.display = "block"
 }
 
 function failederr() {
-    transacSuccess.style.display = "none"
-    amountpay.style.display = "none"
     setTimeout(() => {
         sect4.classList.remove("disabled")
         closeFloatingContainer()
         closepaymentContainer()
     }, 1000);
+    transacSuccess.style.display = "none"
+    amountpay.style.display = "none"
     dashboards.style.display = "block"
 }
 
