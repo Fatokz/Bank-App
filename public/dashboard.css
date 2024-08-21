@@ -187,7 +187,7 @@ body {
     color: white;
 }
 
-#notifications{
+#notifications {
     display: none;
 }
 
@@ -746,15 +746,11 @@ body {
     height: 38px;
 }
 
-#welcome small {
-    background-color: red;
-}
-
 #welcome p {
     font-size: 12px;
     margin: -5px 0 0 0;
     font-weight: 500;
-    color: gray;
+    color: rgba(0, 0, 0, 0.731);
 }
 
 #ii i {
@@ -931,7 +927,7 @@ body {
     margin: 10px 0 0 0;
     color: #030b1d;
     font-weight: 500;
-    text-shadow: 1px 2px  #ffc107;
+    text-shadow: 1px 2px #ffc107;
 }
 
 #advert {
@@ -954,7 +950,7 @@ body {
 .serve {
     margin: 10px 0 0 0;
     font-weight: 500;
-    text-shadow: 1px 2px  #ffc107;
+    text-shadow: 1px 2px #ffc107;
 }
 
 #services {
@@ -2001,7 +1997,7 @@ input[type="number"]::-webkit-inner-spin-button {
     font-size: 'Roboto', 'san-serif';
 }
 
-#transacSuccess{
+#transacSuccess {
     display: none;
 }
 
@@ -2069,7 +2065,7 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 10px;
 }
 
-#moneyReceipt{
+#moneyReceipt {
     display: none;
 }
 
@@ -2179,10 +2175,10 @@ input[type="number"]::-webkit-inner-spin-button {
 #vitualCard {
     height: 100vh;
     width: 100%;
-    background-color: #ffc107;
+    background-color: white;
 }
 
-#vitualCard{
+#vitualCard {
     display: none;
 }
 
@@ -2194,7 +2190,7 @@ input[type="number"]::-webkit-inner-spin-button {
     color: #030b1d;
 }
 
-.carddsd{
+.carddsd {
     width: 50%;
     display: flex;
     justify-content: space-between;
@@ -2205,8 +2201,8 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 90vh;
     width: 100%;
     padding: 12px;
-    /* background-color: white; */
-    background-color: #ffc107;
+    background-color: white;
+    /* background-color: #ffc107; */
 }
 
 #hoverDiv {
@@ -2231,6 +2227,7 @@ input[type="number"]::-webkit-inner-spin-button {
     transform-style: preserve-3d;
     transition: transform 0.5s;
     background-color: aliceblue;
+    border: 1.5px solid #ffc107;
     border-radius: 10px;
     /* padding: 10px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -2323,42 +2320,345 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 5px;
 }
 
-#resetPins{
+#topAirtime {
     height: 100vh;
     width: 100%;
     background-color: white;
-    padding: 15px;
 }
 
-/* #resetPins{
+#topAirtime {
     display: none;
-} */
+}
 
-/* Print Styles */
-/* @media print {
-    #moneyReceipt {
-        background-color: #030b1d !important;
-        background-image: url('./Images/geometric-intersection.png') !important;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
+#topNavAir {
+    height: 50px;
+    width: 100%;
+    /* background-color: red; */
+}
+
+#wths {
+    padding: 2px 10px;
+    width: 64%;
+    /* background-color: #030b1d; */
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    /* align-items: center; */
+}
+
+#sectAir {
+    padding: 10px;
+    height: 91vh;
+    /* background-color: red; */
+    position: relative !important;
+    overflow: hidden;
+}
+
+#airNumbs {
+    height: 77px;
+    width: 100%;
+    background-color: #030b1d;
+    margin-top: 6px;
+    border-radius: 10px;
+}
+
+#div1 {
+    height: 41px;
+    width: 20%;
+    /* background-color: red; */
+    position: relative;
+    /* Ensure that the absolute positioning of #allNetworks is relative to #div1 */
+}
+
+#netCircle {
+    cursor: pointer;
+}
+
+#netCircle img {
+    height: 40px;
+    width: 40px;
+    border: 1.5px solid #ffc107;
+    border-radius: 50%;
+}
+
+.focux {
+    position: relative;
+    text-decoration: none;
+}
+
+#allNetworks {
+    height: 0;
+    width: 13em !important;
+    background-color: #030b1d;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 6px;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.focux:focus-within #allNetworks {
+    height: 9.5em;
+    /* Automatically adjusts height to fit content */
+    opacity: 1;
+}
+
+#allNetworks .eachNetwork {
+    margin: 0 0 8px 0;
+    padding: 0.2em;
+    color: white;
+    /* background-color: red; */
+    border-bottom: 1px solid rgb(60, 58, 58);
+    cursor: pointer;
+}
+
+.eachNetwork img {
+    height: 35px;
+    width: 35px;
+    /* border: 1px solid #ffc107; */
+    border-radius: 50%;
+}
+
+#div2 {
+    height: 41px;
+    width: 65%;
+    /* background-color: blue; */
+    padding: 0 5px;
+}
+
+#div2 input::placeholder {
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+    color: #ffc1078b;
+}
+
+#div2 input {
+    outline: none;
+    border: none;
+    margin-top: 2px;
+    width: 100%;
+    height: 35px;
+    font-size: 17px;
+    font-family: 'Roboto', 'san-serif';
+    background: transparent;
+    color: white;
+}
+
+#userAir {
+    height: 35px;
+    width: 35px;
+    background-color: #ffc1078b;
+    border-radius: 10px;
+
+}
+
+#div3 {
+    height: 41px;
+    width: 13%;
+    /* background-color: green; */
+}
+
+#Topups {
+    height: 25em;
+    width: 100%;
+    background-color: #030b1d;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 10px;
+    /* position: relative; */
+}
+
+#topAmount {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.perAmount {
+    height: 70px;
+    width: 30%;
+    background-color: #ae850a;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Roboto', 'san-serif';
+    line-height: 10px;
+    padding-top: 13px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.perAmount small {
+    color: #ffc107;
+    font-size: 15px;
+}
+
+.innpp {
+    margin-top: 15px;
+}
+
+#hardAmount {
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    /* background-color: red; */
+    border-bottom: 1.2px solid rgb(68, 65, 65);
+    height: 50px;
+    gap: 6px;
+    margin-top: 5em;
+}
+
+#hardAmount:focus-within {
+    border-bottom: 1.3px solid white;
+}
+
+.rounds {
+    height: 35px;
+    width: 65px;
+    border-radius: 20px;
+    color: white;
+    outline: none;
+    background: #ffc107;
+    border: none;
+}
+
+#hardAmount input {
+    outline: none;
+    border: none;
+    width: 100%;
+    background: transparent;
+    color: white;
+    font-size: 17px;
+    font-family: 'Roboto', 'san-serif';
+}
+
+
+#hardAmount input::placeholder {
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+    color: #ffc1078b;
+}
+
+/* Payment Airtime Floating */
+.payAir-container {
+    width: 100% !important;
+    padding: 15px;
+    height: 70vh;
+    background-color: #030b1d;
+    color: white;
+    border-radius: 25px 25px 0 0;
+    position: absolute;
+    bottom: -70vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: none;
+    border-top: 3px solid #ffc107;
+    animation: floatUp 1s ease-in-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -70vh;
+        /* Start from outside the view */
     }
 
+    100% {
+        bottom: 0;
+        /* Move to the top within the parent container */
+    }
+}
 
-    #safeReceip {
-        height: 50vh !important;
-        width: 100%;
-        background-color: #030b1d !important;
-        border-radius: 5px;
-        padding: 10px;
-        color: white;
-        font-family: 'Roboto', 'sans-serif';
+@keyframes floatDown {
+    0% {
+        bottom: 0;
+        /* Start from the top */
     }
 
-    #printRecipt,
-    #printRecipt * {
-        display: none;
+    100% {
+        bottom: -70vh;
+        /* Move to outside the view */
     }
-} */
+}
+
+.payAir-container.float-up {
+    animation: floatUp 1s ease-in-out forwards;
+}
+
+.payAir-container.float-down {
+    animation: floatDown 1s ease-in-out forwards;
+}
+
+
+#payUptop {
+    height: 30px;
+    width: 63% !important;
+    text-align: center;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    padding-top: 3px;
+    /* background-color: rebeccapurple; */
+    margin-left: auto;
+    font-size: 16px;
+}
+
+#infosAir {
+    color: red !important;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+    height: 30px;
+    font-size: 13px !important;
+}
+
+.pinAirBoxes {
+    /* display: flex; */
+    gap: 15px !important;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    height: 10vh;
+    /* background-color: red; */
+    padding-top: 3em;
+}
+
+.pin-top {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background: transparent;
+    color: white;
+}
+
+.pin-top:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 5px rgba(255, 217, 0, 0.5);
+}
+
+.completes {
+    font-size: 12px !important;
+}
+
+#sendAir {
+    height: fit-content;
+    width: 100%;
+    text-align: center;
+    margin: 7em 0 0 0;
+}
+
 
 @media (max-width : 1300px) {
     #footer {

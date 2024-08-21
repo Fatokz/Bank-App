@@ -49,6 +49,7 @@ let xmark = document.getElementById("xmark");
 let infos = document.getElementById("infos");
 let processMoney = document.getElementById("processMoney");
 let pinBoxes = document.querySelectorAll(".pin-box");
+let pinAirBoxes = document.querySelectorAll(".pin-top");
 let imageProfile = document.getElementById("imageProfile");
 let nameProfile = document.getElementById("nameProfile");
 let mails = document.getElementById("mails");
@@ -70,7 +71,7 @@ let amountSent = document.getElementById('amountSent');
 let errorFailed = document.getElementById('errorFailed');
 let moneyReceipt = document.getElementById('moneyReceipt');
 let notifications = document.getElementById('notifications');
-let resetPins = document.getElementById('resetPins');
+let topAirtime = document.getElementById('topAirtime');
 // let note ;
 
 let currentUser;
@@ -96,7 +97,7 @@ errorFailed.style.display = "none"
 moneyReceipt.style.display = "none"
 notifications.style.display = "none"
 vitualCard.style.display = "none"
-resetPins.style.display = "none"
+topAirtime.style.display = "none"
 
 
 infos.innerHTML = ""
@@ -410,7 +411,7 @@ function check() {
                                     <i class="fa-solid fa-piggy-bank"></i>
                                     <p>To SafeCoin</p>
                                 </div>
-                                <div id="withdraw">
+                                <div id="withdraw" onclick="viewAirtime()">
                                     <i class="fa-solid fa-square-phone"></i>
                                     <p>Airtime</p>
                                 </div>
@@ -1091,10 +1092,8 @@ function sendFunds() {
         floatingContainer.classList.remove("float-down");
         void floatingContainer.offsetWidth;
         floatingContainer.style.display = 'block';
-        floatingContainer.classList.add("float-up");
-
+        floatingContainer.classList.add("float-up")
     }
-
 }
 
 function prev() {
@@ -1202,7 +1201,6 @@ async function sendFund() {
     TransMonie.innerText = "Processing ..."
     try {
         // Get the current date and current time
-        let notes = document.getElementById("notes")
         const currentDate = new Date();
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
         const formattedDate = currentDate.toLocaleDateString('en-US', options);
@@ -1327,7 +1325,7 @@ function BTCoin() {
                         });
                 });
         } else {
-            // Handle the case when the user is signed out
+
             // console.log("User is signed out.");
         }
     });
@@ -1458,6 +1456,310 @@ function failederr() {
     amountpay.style.display = "none"
     dashboards.style.display = "block"
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownButton = document.querySelector('#div1 .btn');
+    const allNetworks = document.getElementById('allNetworks');
+
+    dropdownButton.addEventListener('click', function () {
+        // Check if the dropdown is already open
+        const isOpen = allNetworks.style.height !== '0px';
+
+        if (isOpen) {
+            // Close the dropdown
+            allNetworks.style.height = '0';
+            allNetworks.style.opacity = '0';
+        } else {
+            // Open the dropdown
+            allNetworks.style.height = allNetworks.scrollHeight + 'px'; // Set height to the scroll height
+            allNetworks.style.opacity = '1';
+        }
+    });
+});
+
+function perShow(event) {
+    // Get the clicked element
+    const clickedElement = event.currentTarget;
+
+    // Find the .echAmt span inside the clicked div
+    const amountSpan = clickedElement.querySelector('.echAmt');
+
+    if (amountSpan) {
+        // Get the amount value
+        const amountValue = amountSpan.textContent.trim();
+
+        // Update the value in the #showAmt input field
+        const showAmtInput = document.getElementById('showAmt');
+        if (showAmtInput) {
+            showAmtInput.value = amountValue;
+            formatToNaira()
+        }
+    }
+}
+
+
+function formatToNaira(event) {
+    // Get the input element and its value
+    const inputField = document.getElementById('showAmt');
+    let value = inputField.value;
+
+    // Save the current cursor position
+    let cursorPosition = inputField.selectionStart;
+
+    // Remove non-numeric characters except the decimal point
+    let cleanedValue = value.replace(/[^0-9.]/g, '');
+    let parts = cleanedValue.split('.');
+    let integerPart = parts[0];
+    let decimalPart = parts.length > 1 ? '.' + parts[1].substring(0, 2) : '';
+
+    // Format the integer part with commas
+    let formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    let formattedValue = formattedIntegerPart + decimalPart;
+
+    // Update the input field with the formatted value
+    inputField.value = formattedValue;
+
+    // Adjust cursor position after formatting
+    let newCursorPosition = cursorPosition + (formattedValue.length - value.length);
+    inputField.setSelectionRange(newCursorPosition, newCursorPosition);
+}
+
+function validateInput(event) {
+    // Allow only digits, the decimal point, and backspace
+    let key = event.key;
+    if (!/[\d.]/.test(key) && key !== 'Backspace') {
+        event.preventDefault();
+    }
+}
+
+// Add event listener for input field to validate on keydown
+document.getElementById('showAmt').addEventListener('keydown', validateInput);
+
+
+function validatePhoneNumber() {
+    // Get the input element
+    const inputField = document.getElementById('Airinpts');
+
+    // Save the current cursor position
+    let cursorPosition = inputField.selectionStart;
+
+    // Remove all non-numeric characters
+    let value = inputField.value.replace(/[^0-9]/g, '');
+
+    // Limit to 11 digits
+    if (value.length > 11) {
+        value = value.substring(0, 11);
+    }
+
+    // Update the input field with the cleaned and formatted value
+    inputField.value = value;
+
+    // Adjust cursor position after formatting
+    let newCursorPosition = cursorPosition;
+    inputField.setSelectionRange(newCursorPosition, newCursorPosition);
+}
+
+// Global variable to keep track of selected network
+let selectedNetwork = null;
+let tranAirtup = document.getElementById("tranAirtup")
+tranAirtup.innerText = "Confirm"
+const phoneInput = document.getElementById('Airinpts');
+const amountInput = document.getElementById('showAmt');
+const payAirtop = document.getElementById('payAirtop');
+const airInfo = document.getElementById('airInfo');
+let amountNumeric ;
+function airTimepay() {
+    let amountValue = amountInput.value;
+    amountNumeric = parseInt(amountValue.replace(/,/g, ''));
+    let phoneValue = phoneInput.value.replace(/[^0-9]/g, ''); // Clean non-numeric characters
+    // phoneValue = phoneInput.value.replace(/[^0-9]/g, ''); // Clean non-numeric characters
+    payAirtop.innerHTML = `${amountNumeric} ${selectedNetwork}`
+
+    // airInfo.innerHTML = "<small class='text-light'>Processing...</small>"
+
+    if (selectedNetwork == null || phoneValue.value == "" || !amountValue.trim()) {
+        airInfo.innerHTML = "Please provide all required details"
+        return;
+    } else if (phoneValue.length !== 11) {
+        airInfo.innerHTML = "Mobile number must be exactly 11 digits."
+        return;
+    } else if (!amountValue.trim()) {
+        airInfo.innerHTML = "Please enter an amount."
+        return;
+    } else if (amountValue < 50) {
+        airInfo.innerHTML = "You can't purchase airtime less than ₦50"
+    } else if (!selectedNetwork) {
+        airInfo.innerHTML = "Please select a network."
+        return;
+    } else if (amountNumeric.toLocaleString() > currentUser.wallet) {
+        // console.log("Insufficient funds");
+        airInfo.innerHTML = "Insufficient funds"
+        return;
+    } else {
+        if (phoneValue.length === 11 && amountValue.trim() && selectedNetwork) {
+            // console.log('Mobile Number:', phoneValue);
+            // console.log('Amount:', amountNumeric);
+            // console.log('Selected Network:', selectedNetwork);
+
+            let payAirsContainer = document.getElementById("payAirsContainer");
+            payAirsContainer.classList.remove("float-down");
+            void payAirsContainer.offsetWidth;
+            payAirsContainer.style.display = 'block';
+            payAirsContainer.classList.add("float-up");
+
+            setTimeout(() => {
+                airInfo.innerHTML = ""
+            }, 1000);
+
+
+        }
+        return;
+    }
+}
+
+// Function to be called when a network is selected
+function disNetwork(event) {
+    // Prevent event from propagating
+    event.stopPropagation();
+
+    // Get the clicked element
+    const clickedElement = event.currentTarget;
+
+    // Get the network name from the clicked element
+    const networkName = clickedElement.querySelector('p').textContent;
+
+    // Store the selected network
+    selectedNetwork = networkName;
+
+    // Update the image source in the netCircle if needed
+    const netImage = document.getElementById('netImage');
+    const imgSrc = clickedElement.getAttribute('data-img-src');
+    if (netImage) {
+        netImage.src = imgSrc;
+    }
+
+    // Log the selected network for debugging
+    // console.log('Selected Network:', networkName);
+}
+
+function closeAirContainer() {
+    // let pintops = document.getElementsByClassName("pin-top")
+    let payAirsContainer = document.getElementById("payAirsContainer");
+    payAirsContainer.classList.remove("float-up");
+    void payAirsContainer.offsetWidth;
+    payAirsContainer.classList.add("float-down");
+    payAirsContainer.addEventListener('animationend', function () {
+        payAirsContainer.style.display = 'none';
+    }, { once: true });
+
+    // Focus the first input field
+    pinAirBoxes.forEach(input => {
+        input.value = '';
+    });
+    pinBoxes[0].focus();
+    infosAir.innerHTML = ""
+}
+
+
+pinAirBoxes.forEach((input) => {
+    input.addEventListener("input", handleInput);
+    input.addEventListener("keydown", handleBackspace);
+});
+
+function handleInput(event) {
+    const input = event.target;
+    if (input.value.length === 1) {
+        const nextInput = input.nextElementSibling;
+        if (nextInput && nextInput.classList.contains("pin-top")) {
+            nextInput.focus();
+        }
+    }
+}
+
+function handleBackspace(event) {
+    const input = event.target;
+    if (event.key === "Backspace" && input.value === '') {
+        const previousInput = input.previousElementSibling;
+        if (previousInput && previousInput.classList.contains("pin-top")) {
+            previousInput.focus();
+        }
+    }
+}
+
+
+async function sendAirups() {
+    let pinairValue = "";
+    pinAirBoxes.forEach(input => {
+        pinairValue += input.value;
+    });
+    // console.log(pinairValue);
+
+    if (pinairValue === "") {
+        infosAir.innerHTML = "Input field can't be empty";
+        return;
+    }
+
+    if (+pinairValue !== currentUser.transaction_pin) {
+        infosAir.innerHTML = "Invalid pin, Try again";
+        return;
+    }
+    infosAir.innerHTML = "";
+    tranAirtup.innerText = "Processing ..."
+    try {
+        // Get the current date and current time
+        const currentDate = new Date();
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const formattedDate = currentDate.toLocaleDateString('en-US', options);
+        const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+        const formattedTime = currentDate.toLocaleTimeString('en-US', timeOptions);
+
+
+        // Update current user's wallet
+        await db.collection("user").doc(currentUserId).update({
+            wallet: currentUser.wallet - amountNumeric
+        });
+
+        // Update current user's transaction history
+        await db.collection("user").doc(currentUserId).update({
+            transaction_history: firebase.firestore.FieldValue.arrayUnion({
+                amount: amountNumeric,
+                message: `Airtime Purchase `,
+                transaction_type: "Debit",
+                date: formattedDate,
+                time: formattedTime,
+            })
+        });
+
+        // alert("Transaction successful");
+        infosAir.innerHTML = "<p class='text-success'>Airtime Purchase successful successful</p>";
+        tranAirtup.innerText = "Confirm"
+        closeAirContainer()
+
+        // Clear PIN input fields
+        pinBoxes.forEach(input => {
+            input.value = '';
+        });
+        pinBoxes[0].focus();
+        return;
+
+    } catch (error) {
+        console.error("Error updating document: ", error);
+        infosAir.innerHTML = "<p class='text-danger'>Transaction failed. Please try again later.</p>";
+        tranAirtup.innerText = "Confirm"
+        return;
+    }
+}
+
+function viewAirtime() {
+    dashboards.style.display = "none"
+    topAirtime.style.display = "block"
+}
+
+function backTopAir() {
+    topAirtime.style.display = "none"
+    dashboards.style.display = "block"
+}
+
 
 function logOut() {
     firebase.auth().signOut().then(() => {

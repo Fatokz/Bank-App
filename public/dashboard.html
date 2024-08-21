@@ -680,7 +680,7 @@
         <div id="cardNav">
           <div class="carddsd">
             <button onclick="backCardV()" class="btn"><i class="fa-solid fa-angle-left text-warning"></i></button>
-          <p class="mt-2">Card</p>
+            <p class="mt-2">Card</p>
           </div>
         </div>
         <div id="cardHover">
@@ -784,9 +784,141 @@
         </div>
       </div>
 
-      <div id="resetPins">
+      <div id="topAirtime">
+        <div id="topNavAir">
+          <div id="wths">
+            <button onclick="backTopAir()" class="btn fs-4"><i class="fa-solid fa-angle-left text-warning"></i></button>
+            <p class="mt-2  fw-semibold">Top up Airtime</p>
+          </div>
+        </div>
+        <div id="sectAir">
+          <div id="airNumbs">
+            <div class="d-flex gap-2 p-1">
+              <div id="div1">
+                <a class="d-flex focux w-100">
+                  <div id="netCircle">
+                    <img id="netImage" src="./Images/default.png" alt="">
+                  </div>
+                  <button class="btn"><i class="fa-solid fa-caret-down text-warning"></i></button>
 
+                  <!-- Dropdown content here -->
+                  <div id="allNetworks">
+                    <div onclick="disNetwork(event)" data-img-src="./Images/mtn.png" class="eachNetwork gap-3 d-flex">
+                      <img src="./Images/mtn.png" alt="MTN">
+                      <p class="mt-1">MTN</p>
+                    </div>
+                    <div onclick="disNetwork(event)" data-img-src="./Images/airtel.png"
+                      class="eachNetwork gap-3 d-flex">
+                      <img src="./Images/airtel.png" alt="Airtel">
+                      <p class="mt-1">Airtel</p>
+                    </div>
+                    <div onclick="disNetwork(event)" data-img-src="./Images/glo.png" class="eachNetwork gap-3 d-flex">
+                      <img src="./Images/glo.png" alt="GLO">
+                      <p class="mt-1">GLO</p>
+                    </div>
+                    <div onclick="disNetwork(event)" data-img-src="./Images/9mobile.png"
+                      class="eachNetwork gap-3 d-flex">
+                      <img src="./Images/9mobile.png" alt="9mobile">
+                      <p class="mt-1">9mobile</p>
+                    </div>
+                    <div onclick="disNetwork(event)" data-img-src="./Images/smile.jpeg"
+                      class="eachNetwork gap-3 d-flex">
+                      <img src="./Images/smile.jpeg" alt="Smile">
+                      <p class="mt-1">Smile</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div id="div2">
+                <div>
+                  <input type="tel" placeholder="Enter mobile number" id="Airinpts" maxlength="11" pattern="[0-9]*"
+                    inputmode="numeric" title="Please enter a valid mobile number with up to 11 digits"
+                    oninput="validatePhoneNumber()">
+                </div>
+              </div>
+            <div id="div3" class="p-1">
+              <div id="userAir">
+                <p class="text-center fs-5 text-warning"><i class="fa-solid fa-user"></i></p>
+              </div>
+            </div>
+          </div>
+          <small id="airInfo" class="text-danger p-3"></small>
+        </div>
+
+        <div id="Topups">
+          <div class="d-flex gap-2">
+            <p class="text-warning"><i class="fa-solid fa-fire-flame-curved"></i></p>
+            <p class="text-light">Top up</p>
+          </div>
+
+          <div id="topAmount">
+            <div class="perAmount" onclick="perShow(event)">
+              <p>₦ <span class="echAmt">50</span></p>
+              <small>₦3 Cashback</small>
+            </div>
+            <div class="perAmount" onclick="perShow(event)">
+              <p>₦ <span class="echAmt">100</span></p>
+              <small>₦6 Cashback</small>
+            </div>
+            <div class="perAmount" onclick="perShow(event)">
+              <p>₦ <span class="echAmt">200</span></p>
+              <small>₦12 Cashback</small>
+            </div>
+            <div class="perAmount" onclick="perShow(event)">
+              <p>₦ <span class="echAmt">500</span></p>
+              <small>₦30 Cashback</small>
+            </div>
+            <div class="perAmount" onclick="perShow(event)">
+              <p>₦ <span class="echAmt">1,000</span></p>
+              <small>₦60 Cashback</small>
+            </div>
+            <div class="perAmount" onclick="perShow(event)">
+              <p>₦ <span class="echAmt">2,000</span></p>
+              <small>₦120 Cashback</small>
+            </div>
+          </div>
+
+          <div id="hardAmount">
+            <p class="innpp">₦</p>
+            <div class="w-100">
+              <input type="text" id="showAmt" placeholder="50-50,000" oninput="formatToNaira(event)"
+                onkeydown="validateInput(event)">
+            </div>
+            <button class="rounds" onclick="airTimepay()">Pay</button>
+          </div>
+
+        <!-- Payment Floating -->
+        <div id="payAirsContainer" class="payAir-container">
+          <div id="payUptop">
+            <p class="mt-3">Transaction PIN</p>
+            <button id="xmark" onclick="closeAirContainer()">
+              <i class="fa-solid fa-x"></i>
+            </button>
+          </div>
+
+          <div class="mx-auto w-75 mt-3">
+            <p class="text-center completes">To complete this Airtime Purchase, please enter your 4-Digit transaction PIN</p>
+          </div>
+
+          <div class="w-100 text-center mt-3">
+            <p>₦ <span class="nmu fs-5" id="payAirtop"></span></p>
+          </div>
+
+          <div class="pinAirBoxes">
+            <input type="password" maxlength="1" class="pin-top" required>
+            <input type="password" maxlength="1" class="pin-top" required>
+            <input type="password" maxlength="1" class="pin-top" required>
+            <input type="password" maxlength="1" class="pin-top" required>
+            <p id="infosAir" class="mt-2 text-danger"></p>
+           
+          </div>
+          <div id="sendAir">
+            <button id="tranAirtup" onclick="sendAirups()" class="btn btn-warning w-75 text-light"></button>
+          </div>
+        </div>
+        </div>
       </div>
+    </div>
     </div>
   </main>
 </body>
