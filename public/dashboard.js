@@ -1733,9 +1733,9 @@ async function sendAirups() {
         // alert("Transaction successful");
         infosAir.innerHTML = "<p class='text-success fs-4'>Airtime Purchase successful</p>";
         tranAirtup.innerText = "Confirm"
-        setTimeout(() => {
-            closeAirContainer()
-        }, 2000);
+            setTimeout(() => {
+                closeAirContainer()
+            }, 2000);
 
         // Clear PIN input fields
         pinBoxes.forEach(input => {
