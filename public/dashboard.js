@@ -1567,7 +1567,7 @@ const phoneInput = document.getElementById('Airinpts');
 const amountInput = document.getElementById('showAmt');
 const payAirtop = document.getElementById('payAirtop');
 const airInfo = document.getElementById('airInfo');
-let amountNumeric ;
+let amountNumeric;
 function airTimepay() {
     let amountValue = amountInput.value;
     amountNumeric = parseInt(amountValue.replace(/,/g, ''));
@@ -1733,7 +1733,9 @@ async function sendAirups() {
         // alert("Transaction successful");
         infosAir.innerHTML = "<p class='text-success'>Airtime Purchase successful successful</p>";
         tranAirtup.innerText = "Confirm"
-        closeAirContainer()
+        setTimeout(() => {
+            closeAirContainer()
+        }, 2000);
 
         // Clear PIN input fields
         pinBoxes.forEach(input => {
