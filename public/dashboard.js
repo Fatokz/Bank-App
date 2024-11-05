@@ -1347,6 +1347,7 @@ function dateSp() {
     dateStamp.innerHTML = formattedDate
 }
 
+// Call the function to change date stamp
 dateSp()
 
 function transBack() {
