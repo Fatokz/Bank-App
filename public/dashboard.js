@@ -72,6 +72,7 @@ let errorFailed = document.getElementById('errorFailed');
 let moneyReceipt = document.getElementById('moneyReceipt');
 let notifications = document.getElementById('notifications');
 let topAirtime = document.getElementById('topAirtime');
+let dateStamp = document.getElementById('dateStamp');
 // let note ;
 
 let currentUser;
@@ -1339,6 +1340,15 @@ function showHistory() {
     dashboards.style.display = "none"
 }
 
+function dateSp() {
+    const currentDate = new Date();
+    const options = { month: 'short'};
+    const formattedDate = currentDate.toLocaleDateString('en-US', options);
+    dateStamp.innerHTML = formattedDate
+}
+
+dateSp()
+
 function transBack() {
     dashboards.style.display = "block"
     displayHistory.style.display = "none"
@@ -1713,7 +1723,6 @@ async function sendAirups() {
         const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
         const formattedTime = currentDate.toLocaleTimeString('en-US', timeOptions);
 
-
         // Update current user's wallet
         await db.collection("user").doc(currentUserId).update({
             wallet: currentUser.wallet - amountNumeric
@@ -1733,9 +1742,9 @@ async function sendAirups() {
         // alert("Transaction successful");
         infosAir.innerHTML = "<p class='text-success fs-4'>Airtime Purchase successful</p>";
         tranAirtup.innerText = "Confirm"
-            setTimeout(() => {
-                closeAirContainer()
-            }, 2000);
+        setTimeout(() => {
+            closeAirContainer()
+        }, 2000);
 
         // Clear PIN input fields
         pinBoxes.forEach(input => {
